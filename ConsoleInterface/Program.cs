@@ -4,6 +4,8 @@ namespace ConsoleInterface {
 
     public class Program
     {
+
+        //test
         static int count = 0;
         static void Main(string[] args) {
             List<Token<int>> tokens = TokensGenerator.generateTokens();
