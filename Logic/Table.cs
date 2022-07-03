@@ -10,6 +10,7 @@ namespace Logic
     {
         private List<Token> history;
         private List<int> lastFaces;
+        public List<Token> History { get { return history; } }
         public List<int> LastFaces { private set { } get { return lastFaces; } }
         public Table() {
             history = new List<Token>();
@@ -18,9 +19,10 @@ namespace Logic
         }
         public void addToken(Token token, int value)
         {
-            history.Add(token);
+            
             if (lastFaces.Count == 0)
             {
+                history.Add(token);
                 for (int i = 0; i < token.Values.Count; i++)
                 {
                     lastFaces.Add(token.Values[i]);
@@ -28,24 +30,59 @@ namespace Logic
             }
             else
             {
+                int aux = token.Values.Count(x => x == value);
+                if (aux == token.Values.Count)
+                {
+                    for (int i = 0; i < lastFaces.Count; i++)
+                    {
+                        if (value == lastFaces[i])
+                        {
+                            if (i == 0) history.Insert(0, token);
+                            else
+                            {
+                                history.Add(token);
+                            }
+                            return;
+                        }
+                    }
+                  
+
+                }
+               
                 for (int i = 0; i < lastFaces.Count; i++)
                 {
+
+
                     if (value == lastFaces[i])
                     {
+
+
                         lastFaces.RemoveAt(i);
-                        
+                        for (int j = 0; j < token.Values.Count; j++)
+                        {
+                            if (token.Values[j] == value) continue;
+                            lastFaces.Insert(i, token.Values[j]);
+
+
+                        }
+
+                        if (i == 0) history.Insert(0, token);
+                        else
+                        {
+                            history.Add(token);
+                        }
+
+                        return;
+                       
                     }
 
                 }
-                for (int i = 0; i < token.Values.Count; i++)
-                {
-                    if (token.Values[i] == value) continue;
-                    lastFaces.Add(token.Values[i]);
-                }
+              
 
             }
 
 
         }
+
     }
 }

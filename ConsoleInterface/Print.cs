@@ -8,91 +8,20 @@ namespace ConsoleInterface
 {
     public static class Print
     {
-
-        public static void endl()
+        public static void printToken(Token t)
         {
-            int l, t;
-            (l, t) = Console.GetCursorPosition();
-            Console.SetCursorPosition(0, t + 5);
-          
+            Console.Write("[{0}:{1}]", t.Values[0], t.Values[1]);
 
         }
-        /*public static void printToken(Token<int> token, bool endl = false, bool vertical = false) {
-            if (vertical)
-                printVerticalToken(token, endl);
-            else
-                printHorizontalToken(token, endl);
-
-        }*/
-
-      /*  private static void printVerticalToken(Token<int> token, bool endl = false)
+        public static void printTable(Table table)
         {
-            int l, t;
-            (l, t) = Console.GetCursorPosition();
-            Console.Write(" --- ");
-            Console.SetCursorPosition(l, t + 1);
-            int _t = t, _l = l;
-            for (int i = 0; i < token.Values.Count; i++)
-            {
+            Console.WriteLine();
+            table.History.ForEach(x => printToken(x));
+            Console.WriteLine();
 
-                Console.SetCursorPosition(_l, ++_t);
-                Console.Write("| {0} |", token.Values[i]);
-                Console.SetCursorPosition(l, ++_t);
-                Console.Write(" --- ");
+            Console.WriteLine("->[{0}:{1}]", table.LastFaces[0], table.LastFaces[1]);
 
-
-            }
-            (l, t) = Console.GetCursorPosition();
-
-            if (l + 10 > Console.BufferWidth)
-            {
-                Console.SetCursorPosition(0, t + 5);
-            }
-            else
-            {
-                if (endl)
-                    Console.WriteLine();
-                else
-                    Console.SetCursorPosition(l + 1, t - 4);
-
-            }
-
+            Console.WriteLine();
         }
-        private static void printHorizontalToken(Token<int> token, bool endl = false)
-        {
-            int l, t;
-            (l, t) = Console.GetCursorPosition();
-            Console.Write(" ------- ");
-            Console.SetCursorPosition(l, t + 1);
-            Console.Write("|");
-
-            for (int i = 0; i < token.Values.Count; i++)
-            {
-
-                Console.Write(" {0} |", token.Values[i]);
-
-
-            }
-            Console.SetCursorPosition(l, t + 2);
-            Console.Write(" ------- ");
-            Console.Write(" ");
-
-            (l, t) = Console.GetCursorPosition();
-
-
-            if (l + 10 > Console.BufferWidth)
-            {
-                Console.SetCursorPosition(0, t + 2);
-            }
-            else
-            {
-                if (endl)
-                    Console.WriteLine();
-                else
-                    Console.SetCursorPosition(l, t - 2);
-
-            }
-
-        }*/
     }
 }

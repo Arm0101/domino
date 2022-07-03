@@ -17,21 +17,9 @@ namespace ConsoleInterface {
             players[2] = new Player("03");
             players[3] = new Player("04");
             referee.handOutTokens(tokens, players);
-            players[0].tokens.ForEach(x => Console.WriteLine("[{0}:{1}]", x.Values[0], x.Values[1]));
-
-            //tokens.ForEach(x => { Console.WriteLine("{0}-{1}",x.Values[0], x.Values[1]); });
-            table.addToken(tokens[0], 1);
-            table.LastFaces.ForEach(x => { Console.Write("{0} ", x); } );
-            Console.WriteLine();
-            table.addToken(tokens[1], 1);
-            table.LastFaces.ForEach(x => { Console.Write("{0} ", x); });
-            Console.WriteLine();
-            Token t;
-            int val;
-            (t, val) = players[0].selectToken(table);
-            players[0].tokens.ForEach(x => Console.WriteLine("[{0}:{1}]", x.Values[0], x.Values[1]));
-            //referee.handOutTokens(tokens, 4);
-
+            Manager manager = new Manager();
+            manager.play(table, players, referee);
+            
 
 
 
