@@ -6,15 +6,24 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class Token<T>
+    public class Token
     {
-        private List<T> values;
-        public List<T> Values { get { return values; } }
+        private List<int> values;
+        public List<int> Values { get { return values; } }
         public Token() { 
-           values = new List<T>();
+           values = new List<int>();
         }
-        public void setValues(List<T> values) {
+        public void setValues(List<int> values) {
             this.values = values;
+        }
+        public int getValue() {
+            int val = 0;
+            for (int i = 0; i < values.Count; i++)
+            {
+                val += values[i];
+            }
+            return val;
+            
         }
  
     }

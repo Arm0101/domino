@@ -8,24 +8,44 @@ namespace Logic
 {
     public class Table
     {
-        private List<Token<int>> history;
-        private List<int> currentValues;
-        public void addToken(Token<int> token, int value) {
+        private List<Token> history;
+        private List<int> lastFaces;
+        public List<int> LastFaces { private set { } get { return lastFaces; } }
+        public Table() {
+            history = new List<Token>();
+            lastFaces = new List<int>();
+            
+        }
+        public void addToken(Token token, int value)
+        {
             history.Add(token);
-            if (currentValues.Count == 0)
+            if (lastFaces.Count == 0)
             {
                 for (int i = 0; i < token.Values.Count; i++)
                 {
-                    currentValues.Add(token.Values[i]);
+                    lastFaces.Add(token.Values[i]);
                 }
             }
-            else { 
-                
-                
+            else
+            {
+                for (int i = 0; i < lastFaces.Count; i++)
+                {
+                    if (value == lastFaces[i])
+                    {
+                        lastFaces.RemoveAt(i);
+                        
+                    }
+
+                }
+                for (int i = 0; i < token.Values.Count; i++)
+                {
+                    if (token.Values[i] == value) continue;
+                    lastFaces.Add(token.Values[i]);
+                }
+
             }
-            
-        
+
+
         }
-        //public List<int> getLastValues { }
     }
 }

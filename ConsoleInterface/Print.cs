@@ -17,15 +17,15 @@ namespace ConsoleInterface
           
 
         }
-        public static void printToken(Token<int> token, bool endl = false, bool vertical = false) {
+        /*public static void printToken(Token<int> token, bool endl = false, bool vertical = false) {
             if (vertical)
                 printVerticalToken(token, endl);
             else
                 printHorizontalToken(token, endl);
 
-        }
+        }*/
 
-        private static void printVerticalToken(Token<int> token, bool endl = false)
+      /*  private static void printVerticalToken(Token<int> token, bool endl = false)
         {
             int l, t;
             (l, t) = Console.GetCursorPosition();
@@ -93,6 +93,6 @@ namespace ConsoleInterface
 
             }
 
-        }
+        }*/
     }
 }

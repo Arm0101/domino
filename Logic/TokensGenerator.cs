@@ -8,18 +8,18 @@ namespace Logic
 {
     public class TokensGenerator
     {
-        public static List<Token<int>> generateTokens()
+        public static List<Token> generateTokens(int n)
         {
-           List<Token<int>> tokens = new List<Token<int>>();
+           List<Token> tokens = new List<Token>();
 
-            for (int i = 1; i <= 2; i++)
+            for (int i = 1; i <= n; i++)
             {
-                for (int j = i; j <= 2; j++)
+                for (int j = i; j <= n; j++)
                 {
                     List<int> v = new List<int>();
                     v.Add(i);
                     v.Add(j);
-                    Token<int> token = new Token<int>();
+                    Token token = new Token();
                     token.setValues(v);
                     tokens.Add(token);
 
