@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{D008FD51-2A4D-466D-95ED-2072E18CFD03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleInterface", "ConsoleInterface\ConsoleInterface.csproj", "{FD7CE66D-B5C5-4A4A-AAB0-12F230B58BAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleInterface", "ConsoleInterface\ConsoleInterface.csproj", "{FD7CE66D-B5C5-4A4A-AAB0-12F230B58BAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", "{D38F0111-E348-4025-80E1-C27FCDE304DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FD7CE66D-B5C5-4A4A-AAB0-12F230B58BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD7CE66D-B5C5-4A4A-AAB0-12F230B58BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD7CE66D-B5C5-4A4A-AAB0-12F230B58BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D38F0111-E348-4025-80E1-C27FCDE304DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D38F0111-E348-4025-80E1-C27FCDE304DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D38F0111-E348-4025-80E1-C27FCDE304DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D38F0111-E348-4025-80E1-C27FCDE304DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

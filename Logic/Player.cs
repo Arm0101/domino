@@ -2,15 +2,15 @@
 namespace Logic
 {
     public class Player {
-        public List<Token> tokens;
+        public List<IToken> tokens;
         private bool passed = false;
         private string id;
         public string ID { set { } get { return id; } }
         public Player(string _id) {
             id = _id;
-            tokens = new List<Token>();
+            tokens = new List<IToken>();
         }
-        public (Token, int) selectToken(Table table) {
+        public (IToken, IFace) selectToken(Table table) {
             passed = false;
 
 
@@ -18,12 +18,12 @@ namespace Logic
             if (table.History.Count == 0)
             {
 
-                return (tokens[0], tokens[0].Values[0]);
+                return (tokens[0], tokens[0].GetFaces().ToArray()[0]);
             } 
 
             foreach (var token in tokens)
             {
-                foreach (var v in token.Values) {
+                foreach (var v in token.GetFaces()) {
                     if (table.LastFaces.Contains(v)) {
                         tokens.Remove(token);
                         return (token, v);
@@ -31,7 +31,7 @@ namespace Logic
                 }
             }
             passed = true;
-            return (null, int.MaxValue);
+            return (null, null);
         }
         public bool isPassed() {
             return passed;

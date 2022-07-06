@@ -6,9 +6,10 @@ namespace Logic
     {
 
 
-        public void handOutTokens(List<Token> tokens, Player[] players)
+        public void handOutTokens(List<IToken> tokens, Player[] players)
 
         { 
+
             //random  
             Random  random = new Random();
              for (int i = 0; i < players.Length ; i++)
@@ -23,11 +24,12 @@ namespace Logic
             }
             
         }
-        public bool Validate(Table table, Token token) {
-            for (int i = 0; i < token.Values.Count; i++)
+        public bool Validate(Table table, IToken token) {
+            foreach (var t in token.GetFaces())
             {
-                if (table.LastFaces.Contains(token.Values[i])) return true;
+                if (table.LastFaces.Contains(t)) return true;
             }
+
             return false;
         }
     }

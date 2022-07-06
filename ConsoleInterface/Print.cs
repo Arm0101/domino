@@ -8,9 +8,10 @@ namespace ConsoleInterface
 {
     public static class Print
     {
-        public static void printToken(Token t)
+        public static void printToken(IToken t)
         {
-            Console.Write("[{0}:{1}]", t.Values[0], t.Values[1]);
+            IFace[] faces = t.GetFaces().ToArray();
+            Console.Write("[{0}:{1}]", faces[0].getRepresentation(), faces[1].getRepresentation());
 
         }
         public static void printTable(Table table)
@@ -19,7 +20,7 @@ namespace ConsoleInterface
             table.History.ForEach(x => printToken(x));
             Console.WriteLine();
 
-            Console.WriteLine("->[{0}:{1}]", table.LastFaces[0], table.LastFaces[1]);
+            Console.WriteLine("->[{0}:{1}]", table.LastFaces[0].GetValue(), table.LastFaces[1].GetValue());
 
             Console.WriteLine();
         }

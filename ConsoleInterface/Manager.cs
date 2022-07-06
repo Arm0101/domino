@@ -60,9 +60,9 @@ namespace ConsoleInterface
             while (!finish(table,players))
             {
                 int t = getTurn(players);
-                Token token;
-                int val;
-                (token, val) = players[t].selectToken(table);
+                IToken token;
+                IFace val;
+                (token,val ) = players[t].selectToken(table);
                 if (token != null)
                 {
                     table.addToken(token, val);
