@@ -39,7 +39,7 @@ namespace ConsoleInterface
                 if (item.tokens.Count == 0) return item.ID;
                 int aux = 0;
                 foreach (var t in item.tokens) {
-                    aux += t.getValue();
+                    aux += getValue(t);
 
                 }
                 if (aux < points) {
@@ -51,11 +51,19 @@ namespace ConsoleInterface
             
            
         }
-     
+        public int getValue(IToken token)
+        {
+            int val = 0;
+            foreach (var face in token.GetFaces())
+            {
+                val += face.GetValue();
+            }
+            return val;
+        }
 
 
-        
-        
+
+
         public void play(Table table, Player[] players, Referee referee) {
             while (!finish(table,players))
             {
