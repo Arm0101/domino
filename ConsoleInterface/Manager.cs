@@ -1,13 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Logic;
 namespace ConsoleInterface
 {
     public class Manager
     {
+
+        private Table table;
+        private IPlayer[] players;
+        private IFinish finish;
+        private History history;
+        private IValidator validator;
+        public Manager(Table _table, IPlayer[] _players,IDistribute distribute, List<IToken> tokens, IFinish _finish, IValidator _validator ,History _history)
+        {
+            table = _table;
+            players = _players;
+            finish = _finish;
+            history = _history;
+            distribute.HandOutTokens(players, tokens);
+            validator = _validator;
+        }
         private int[] order = {0,1,2,3 };
         private int actual_turn = -1;
         private int getTurn(IPlayer[] players) {
@@ -17,15 +28,6 @@ namespace ConsoleInterface
              return order[++actual_turn];       
         }
 
-        private bool finish(Table table, IPlayer[] players) {
-            foreach (var item in players)
-            {
-                if (item.getTokens().ToList().Count == 0) return true;
-            }
-           
-            return false;
-
-        }
         private string Win(Table table, IPlayer[] players )
         {
             string id = "";
@@ -62,8 +64,8 @@ namespace ConsoleInterface
 
 
 
-        public void play(Table table, IPlayer[] players, IValidator validator) {
-            while (!finish(table,players))
+        public void play() {
+            while (!finish.Finish(table,players, history))
             {
                 int t = getTurn(players);
                 IToken token;
@@ -73,7 +75,7 @@ namespace ConsoleInterface
                 {
                     table.addToken(token, val);
                 }
-
+                history.log(players[t].getID(), token);
                 Console.Clear();
                 Print.printTable(table);
                 Console.WriteLine();
