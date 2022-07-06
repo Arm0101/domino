@@ -10,7 +10,8 @@ namespace ConsoleInterface
         private IFinish finish;
         private History history;
         private IValidator validator;
-        public Manager(Table _table, IPlayer[] _players,IDistribute distribute, List<IToken> tokens, IFinish _finish, IValidator _validator ,History _history)
+        private IOrder order;
+        public Manager(Table _table, IPlayer[] _players,IDistribute distribute, List<IToken> tokens,IOrder _order, IFinish _finish, IValidator _validator ,History _history)
         {
             table = _table;
             players = _players;
@@ -18,15 +19,9 @@ namespace ConsoleInterface
             history = _history;
             distribute.HandOutTokens(players, tokens);
             validator = _validator;
+            order = _order;
         }
-        private int[] order = {0,1,2,3 };
-        private int actual_turn = -1;
-        private int getTurn(IPlayer[] players) {
-            if (actual_turn + 1 > order.Length - 1)
-                actual_turn = -1;
-            
-             return order[++actual_turn];       
-        }
+       
 
         private string Win(Table table, IPlayer[] players )
         {
@@ -67,25 +62,25 @@ namespace ConsoleInterface
         public void play() {
             while (!finish.Finish(table,players, history))
             {
-                int t = getTurn(players);
+                IPlayer player = order.GetPlayer(table,players, history);
                 IToken token;
                 IFace val;
-                (token,val ) = players[t].selectToken(table, validator);
+                (token,val ) = player.selectToken(table, validator);
                 if (token != null)
                 {
                     table.addToken(token, val);
                 }
-                history.log(players[t].getID(), token);
+                history.log(player.getID(), token);
                 Console.Clear();
                 Print.printTable(table);
                 Console.WriteLine();
                 if (token == null)
                 {
-                    Console.WriteLine("El jugador {0} se ha pasado", players[t].getID());
+                    Console.WriteLine("El jugador {0} se ha pasado", player.getID());
                 }
                 else
                 {
-                    Console.WriteLine("El jugador {0} ha jugado", players[t].getID());
+                    Console.WriteLine("El jugador {0} ha jugado", player.getID());
                     Print.printToken(token);
 
                 }
