@@ -18,7 +18,7 @@ namespace ConsoleInterface {
           
 
 
-            Manager manager = new Manager(new Table(),players, new RandomDistibute(10) , tokens, new NormalOrder(players),new NormalFinish(), new NormalValidator(), new History());
+            Manager manager = new Manager(new Table(),players, new RandomDistibute(10) , tokens, new NormalOrder(players),new NormalFinish(),new NormalWin(), new NormalValidator(), new History());
             manager.play();
            
             //IToken t;
