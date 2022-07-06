@@ -19,10 +19,7 @@ namespace ConsoleInterface
         public static void printTable(Table table)
         {
             Console.WriteLine();
-            IToken[] tokens = table.History.ToArray();
-            for (int i = 0; i < tokens.Length - 1; i++) { 
-               
-            }
+            table.History.ForEach(x => printToken(x));
             Console.WriteLine();
 
             Console.WriteLine("->[{0}:{1}]", table.LastFaces[0].getRepresentation(), table.LastFaces[1].getRepresentation());

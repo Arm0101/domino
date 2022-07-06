@@ -10,25 +10,23 @@ namespace ConsoleInterface
     {
         private int[] order = {0,1,2,3 };
         private int actual_turn = -1;
-        private int getTurn(Player[] players) {
+        private int getTurn(IPlayer[] players) {
             if (actual_turn + 1 > order.Length - 1)
                 actual_turn = -1;
             
              return order[++actual_turn];       
         }
 
-        private bool finish(Table table, Player[] players) {
+        private bool finish(Table table, IPlayer[] players) {
             foreach (var item in players)
             {
-                if (item.tokens.Count == 0) return true;
+                if (item.getTokens().ToList().Count == 0) return true;
             }
-            foreach (var item in players) { 
-                if (!item.isPassed()) return false;
-            }
-            return true;
+           
+            return false;
 
         }
-        private string Win(Table table, Player[] players )
+        private string Win(Table table, IPlayer[] players )
         {
             string id = "";
             int points = int.MaxValue;
@@ -36,15 +34,15 @@ namespace ConsoleInterface
             {
 
 
-                if (item.tokens.Count == 0) return item.ID;
+                if (item.getTokens().ToList().Count == 0) return item.getID();
                 int aux = 0;
-                foreach (var t in item.tokens) {
+                foreach (var t in item.getTokens().ToList()) {
                     aux += getValue(t);
 
                 }
                 if (aux < points) {
                     points = aux;
-                    id = item.ID;
+                    id = item.getID();
                 }
             }
             return id;
@@ -64,13 +62,13 @@ namespace ConsoleInterface
 
 
 
-        public void play(Table table, Player[] players, Referee referee) {
+        public void play(Table table, IPlayer[] players, IValidator validator) {
             while (!finish(table,players))
             {
                 int t = getTurn(players);
                 IToken token;
                 IFace val;
-                (token,val ) = players[t].selectToken(table);
+                (token,val ) = players[t].selectToken(table, validator);
                 if (token != null)
                 {
                     table.addToken(token, val);
@@ -79,17 +77,17 @@ namespace ConsoleInterface
                 Console.Clear();
                 Print.printTable(table);
                 Console.WriteLine();
-                if (players[t].isPassed())
+                if (token == null)
                 {
-                    Console.WriteLine("El jugador {0} se ha pasado", players[t].ID);
+                    Console.WriteLine("El jugador {0} se ha pasado", players[t].getID());
                 }
                 else
                 {
-                    Console.WriteLine("El jugador {0} ha jugado", players[t].ID);
+                    Console.WriteLine("El jugador {0} ha jugado", players[t].getID());
                     Print.printToken(token);
 
                 }
-                Thread.Sleep(1000);
+                Console.ReadKey();
             }
 
             Console.WriteLine("El jufador {0} ha ganado", Win(table,players));

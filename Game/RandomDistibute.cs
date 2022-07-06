@@ -9,7 +9,7 @@ namespace Game
         {
             n_players = n;     
         }
-        public void HandOutTokens(Player[] players, List<IToken> tokens)
+        public void HandOutTokens(IPlayer[] players, List<IToken> tokens)
         {
             //random
 
@@ -19,7 +19,7 @@ namespace Game
                 for (int j = 0; j < n_players; j++)
                 {
                     int index = random.Next(0, tokens.Count);
-                    players[i].tokens.Add(tokens[index]);
+                    players[i].addToken(tokens[index]);
                     tokens.Remove(tokens[index]);
 
                 }

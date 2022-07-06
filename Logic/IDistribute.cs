@@ -4,6 +4,6 @@ namespace Logic
 {
     public interface IDistribute
     {
-        public void HandOutTokens(Player[] players, List<IToken> tokens);
+        public void HandOutTokens(IPlayer[] players, List<IToken> tokens);
     }
 }

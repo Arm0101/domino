@@ -9,20 +9,13 @@ namespace Logic
             distribute = _distribute;
         }
 
-        public void handOutTokens(List<IToken> tokens, Player[] players)
+        public void handOutTokens(List<IToken> tokens, IPlayer[] players)
 
         {
             distribute.HandOutTokens(players, tokens);
           
             
         }
-        public bool Validate(Table table, IToken token) {
-            foreach (var t in token.GetFaces())
-            {
-                if (table.LastFaces.Contains(t)) return true;
-            }
 
-            return false;
-        }
     }
 }
