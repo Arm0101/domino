@@ -8,7 +8,7 @@ namespace Logic
 {
     public interface IPlayer
     {
-        public (IToken, IFace) selectToken(Table table, IValidator validator);
+        public (IToken, IFace) selectToken(ITable table, IValidator validator);
         public void addToken(IToken token);
         public IEnumerable<IToken> getTokens();
         public string getID();

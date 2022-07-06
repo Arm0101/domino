@@ -5,14 +5,14 @@ namespace ConsoleInterface
     public class Manager
     {
 
-        private Table table;
+        private ITable table;
         private IPlayer[] players;
         private IFinish finish;
         private History history;
         private IValidator validator;
         private IOrder order;
         private IWin win;
-        public Manager(Table _table, IPlayer[] _players,IDistribute distribute, List<IToken> tokens,IOrder _order, IFinish _finish, IWin _win ,IValidator _validator ,History _history)
+        public Manager(ITable _table, IPlayer[] _players,IDistribute distribute, List<IToken> tokens,IOrder _order, IFinish _finish, IWin _win ,IValidator _validator ,History _history)
         {
             table = _table;
             players = _players;

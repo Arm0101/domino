@@ -16,13 +16,14 @@ namespace ConsoleInterface
         public static void invert (IToken token) {
 
         }
-        public static void printTable(Table table)
+        public static void printTable(ITable table)
         {
             Console.WriteLine();
-            table.History.ForEach(x => printToken(x));
+            List <IFace> last_faces = table.getCurrentFaces().ToList();
+            table.getHistory().ToList().ForEach(x => printToken(x));
             Console.WriteLine();
 
-            Console.WriteLine("->[{0}:{1}]", table.LastFaces[0].getRepresentation(), table.LastFaces[1].getRepresentation());
+            Console.WriteLine("->[{0}:{1}]", last_faces[0].getRepresentation(), last_faces[1].getRepresentation());
 
             Console.WriteLine();
         }

@@ -5,7 +5,7 @@ namespace Game
     public class NormalFinish : IFinish
     {
 
-        public bool Finish(Table table, IPlayer[] players, History history)
+        public bool Finish(ITable table, IPlayer[] players, History history)
         {
             foreach (var item in players)
             {

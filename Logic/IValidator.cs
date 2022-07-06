@@ -8,6 +8,6 @@ namespace Logic
 {
     public interface IValidator
     {
-        bool Validate(Table table, IToken token);
+        bool Validate(ITable table, IToken token);
     }
 }

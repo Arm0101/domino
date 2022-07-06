@@ -4,6 +4,6 @@ namespace Logic
 {
     public interface IWin
     {
-        IPlayer[] getWiner(Table table, IPlayer[] players, History history);
+        IEnumerable<IPlayer> getWiner(ITable table, IPlayer[] players, History history);
     }
 }

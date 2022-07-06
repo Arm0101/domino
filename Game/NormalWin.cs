@@ -4,7 +4,7 @@ namespace Game
 {
     public class NormalWin : IWin
     {
-        public IPlayer[] getWiner(Table table, IPlayer[] players, History history)
+        public IEnumerable<IPlayer> getWiner(ITable table, IPlayer[] players, History history)
         {
             IPlayer[] winner = new IPlayer[1];
             int points = int.MaxValue;

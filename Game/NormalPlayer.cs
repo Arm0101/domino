@@ -26,10 +26,10 @@ namespace Game
             return tokens;
         }
 
-        public (IToken, IFace) selectToken(Table table, IValidator validator)
+        public (IToken, IFace) selectToken(ITable table, IValidator validator)
         {
-
-            if (table.LastFaces.Count == 0)
+            List<IFace> curr_faces = table.getCurrentFaces().ToList();
+            if (curr_faces.Count == 0)
             {
 
                 IFace f = tokens[0].GetFaces().ToList()[0];
@@ -42,7 +42,7 @@ namespace Game
                     IFace face;
                     List<IFace> faces_token = token.GetFaces().ToList();
                     
-                    foreach (var f in table.LastFaces)
+                    foreach (var f in curr_faces)
                     {
                         if (faces_token.Contains(f))
                         {

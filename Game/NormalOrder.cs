@@ -14,7 +14,7 @@ namespace Game
             }
         
         }
-        public IPlayer GetPlayer(Table table, IPlayer[] players, History history)
+        public IPlayer GetPlayer(ITable table, IPlayer[] players, History history)
         {
        
             if (actual_turn + 1 > order.Length - 1)

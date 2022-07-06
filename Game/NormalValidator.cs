@@ -4,13 +4,14 @@ namespace Game
 {
     public class NormalValidator : IValidator
     {
-        public bool Validate(Table table, IToken token)
+        public bool Validate(ITable table, IToken token)
         {
-            if (table.LastFaces.Count == 0) return true;
+            List<IFace> lastFaces = table.getCurrentFaces().ToList();
+            if (lastFaces.Count == 0) return true;
 
             foreach (var t in token.GetFaces())
             {
-                if (table.LastFaces.Contains(t)) return true;
+                if (lastFaces.Contains(t)) return true;
             }
 
             return false;
