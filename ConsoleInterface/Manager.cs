@@ -50,6 +50,8 @@ namespace ConsoleInterface
                     Print.printToken(token);
 
                 }
+
+                Print.printPlayersTokens(players);
                 Console.ReadKey();
             }
            

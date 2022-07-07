@@ -27,5 +27,29 @@ namespace ConsoleInterface
 
             Console.WriteLine();
         }
+        public static void printPlayersTokens(IPlayer[] players) {
+            int n = 0;
+            
+            players.ToList().ForEach(x => { if (x.getTokens().ToList().Count > n) n = x.getTokens().ToList().Count; });
+            Console.WriteLine();
+            for (int i = 0; i < n; i++)
+            {
+                
+                for (int j = 0; j < players.Length; j++) {
+                    IToken [] tokens = players[j].getTokens().ToArray();
+                    if (tokens.Length - 1 >= i)
+                    {
+                        printToken(tokens[i]);
+                    }
+                    else {
+                        Console.Write("[-:-]");
+                    }
+                    Console.Write("      ");
+                   
+                }
+                Console.WriteLine();
+            }
+      
+        }
     }
 }
