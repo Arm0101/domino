@@ -31,13 +31,11 @@ namespace Game
 
         }
 
-        private int getValue(IToken token)
+        private int getValue(Token token)
         {
             int val = 0;
-            foreach (var face in token.GetFaces())
-            {
-                val += face.GetValue();
-            }
+            val += token.Face1.GetValue();
+            val += token.Face2.GetValue();
             return val;
         }
 

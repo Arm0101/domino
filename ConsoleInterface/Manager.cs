@@ -12,7 +12,7 @@ namespace ConsoleInterface
         private IValidator validator;
         private IOrder order;
         private IWin win;
-        public Manager(ITable _table, IPlayer[] _players,IDistribute distribute, List<IToken> tokens,IOrder _order, IFinish _finish, IWin _win ,IValidator _validator ,History _history)
+        public Manager(ITable _table, IPlayer[] _players,IDistribute distribute, List<Token> tokens,IOrder _order, IFinish _finish, IWin _win ,IValidator _validator ,History _history)
         {
             table = _table;
             players = _players;
@@ -29,7 +29,7 @@ namespace ConsoleInterface
             while (!finish.Finish(table,players, history))
             {
                 IPlayer player = order.GetPlayer(table,players, history);
-                IToken token;
+                Token token;
                 IFace val;
                 (token,val ) = player.selectToken(table, validator);
                 if (token != null)

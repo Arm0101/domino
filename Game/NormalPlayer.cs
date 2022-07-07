@@ -5,13 +5,13 @@ namespace Game
     public class NormalPlayer : IPlayer
     {
         private string id;
-        List<IToken> tokens;
+        List<Token> tokens;
         public NormalPlayer(string _id) {
 
-            tokens = new List<IToken>();
+            tokens = new List<Token>();
             id = _id;
         }
-        public void addToken(IToken token)
+        public void addToken(Token token)
         {
             tokens.Add(token);
         }
@@ -21,38 +21,31 @@ namespace Game
            return id;
         }
 
-        public IEnumerable<IToken> getTokens()
+        public IEnumerable<Token> getTokens()
         {
             return tokens;
         }
 
-        public (IToken, IFace) selectToken(ITable table, IValidator validator)
+        public (Token, IFace) selectToken(ITable table, IValidator validator)
         {
-            List<IFace> curr_faces = table.getCurrentFaces().ToList();
-            if (curr_faces.Count == 0)
+            List <IFace> curr_faces = new List<IFace>() { table.FaceRight(), table.FaceLeft()} ;
+            if (curr_faces[0] == null && curr_faces[1] == null)
             {
 
-                IFace f = tokens[0].GetFaces().ToList()[0];
-                IToken t = tokens[0];
+                IFace f = tokens[0].Face1;
+                Token t = tokens[0];
                 tokens.Remove(t);
                 return (t, f);
             }
-            foreach (IToken token in tokens) {
+            foreach (Token token in tokens) {
                 if (validator.Validate(table, token)) {
-                    IFace face;
-                    List<IFace> faces_token = token.GetFaces().ToList();
                     
-                    foreach (var f in curr_faces)
-                    {
-                        if (faces_token.Contains(f))
-                        {
-                            face = f;
-                            tokens.Remove(token);
-                            return (token, face);
-                        }  
-                    }
+                    IFace face = null;
 
-                   
+                    if (curr_faces.Contains(token.Face1)) face = token.Face1;
+                    if (curr_faces.Contains(token.Face2)) face = token.Face2;
+                    tokens.Remove(token);
+                    return (token, face);
                 }
                 
             }

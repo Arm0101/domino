@@ -5,19 +5,19 @@ namespace Logic
 {
     public class TokensGenerator
     {
-        public static IEnumerable<IToken> generateTokens(int n)
+        public static IEnumerable<Token> generateTokens(int n)
         {
-           List<IToken> tokens = new List<IToken>();
+           List<Token> tokens = new List<Token>();
 
             for (int i = 1; i <= n; i++)
             {
                 for (int j = i; j <= n; j++)
                 {
-                    IFace[] faces = new IFace[2];
-                    faces[0] = new NormalFace(i);
-                    faces[1] = new NormalFace(j);
+                   
+                     IFace face1 = new NormalFace(i);
+                     IFace face2  = new NormalFace(j);
                  
-                    tokens.Add(new NormalToken(faces));
+                    tokens.Add(new Token(face1,face2));
 
 
                 }

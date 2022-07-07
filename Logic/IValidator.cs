@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Logic
 {
     public interface IValidator
     {
-        bool Validate(ITable table, IToken token);
+        bool Validate(ITable table, Token token);
     }
 }

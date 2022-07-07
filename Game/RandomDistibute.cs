@@ -9,10 +9,10 @@ namespace Game
         {
             n_players = n;     
         }
-        public void HandOutTokens(IPlayer[] players, List<IToken> tokens)
+        public void HandOutTokens(IPlayer[] players, List<Token> tokens)
         {
             //random
-
+            
             Random random = new Random();
             for (int i = 0; i < players.Length; i++)
             {
