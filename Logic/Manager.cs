@@ -12,7 +12,10 @@ namespace ConsoleInterface
         private IValidator validator;
         private IOrder order;
         private IWin win;
-        public Manager(ITable _table, IPlayer[] _players,IDistribute distribute, List<Token> tokens,IOrder _order, IFinish _finish, IWin _win ,IValidator _validator ,History _history)
+        IMonitor infoMonitor;
+        InfoHandler infoHandler;
+        public Manager(ITable _table, IPlayer[] _players,IDistribute distribute, List<Token> tokens,IOrder _order,
+            IFinish _finish, IWin _win ,IValidator _validator ,History _history, IMonitor _infoMonitor)
         {
             table = _table;
             players = _players;
@@ -22,43 +25,34 @@ namespace ConsoleInterface
             validator = _validator;
             order = _order;
             win = _win;
+            infoMonitor = _infoMonitor;
+            infoHandler = new InfoHandler();
         }
       
    
         public void play() {
+            List<IPlayer> winners = new List<IPlayer> ();
+            infoMonitor.Subscribe(infoHandler);
             while (!finish.Finish(table,players, history))
             {
                 IPlayer player = order.GetPlayer(table,players, history);
                 Token token;
                 IFace val;
-                (token,val ) = player.selectToken(table, validator);
+                (token,val) = player.selectToken(table, validator);
                 if (token != null)
                 {
                     table.addToken(token, val);
                 }
+               
+                
                 history.log(player.getID(), token);
-                Console.Clear();
-                Print.printTable(table);
-                Console.WriteLine();
-                if (token == null)
-                {
-                    Console.WriteLine("El jugador {0} se ha pasado", player.getID());
-                }
-                else
-                {
-                    Console.Write("El jugador {0} ha jugado:  ", player.getID());
-                    Print.printToken(token);
-                    Console.WriteLine();
-
-                }
-
-                Print.printPlayersTokens(players);
-                Console.ReadKey();
+                infoHandler.Update(table, history, players.ToList(), winners,false);
             }
-           
-            foreach (IPlayer player in win.getWiner(table,players,history)) {
-                Console.WriteLine("El jugador {0} ha ganado", player.getID());
-            }
+
+
+            winners = win.getWiner(table, players, history).ToList();
+            infoHandler.Update(table, history, players.ToList(), winners, true);
+            infoMonitor.Unsubscribe();
         
         }
      
