@@ -46,8 +46,9 @@ namespace ConsoleInterface
                 }
                 else
                 {
-                    Console.WriteLine("El jugador {0} ha jugado", player.getID());
+                    Console.Write("El jugador {0} ha jugado:  ", player.getID());
                     Print.printToken(token);
+                    Console.WriteLine();
 
                 }
 

@@ -37,7 +37,8 @@ namespace Game
                 if (face1.Equals(value))
                 {
                     face1 = token.Face2;
-                    hist.Insert(0, token);
+                    Token aux = new Token(token.Face2, token.Face1);
+                    hist.Insert(0, aux);
                     return ;
                 }
                 if (face2.Equals(value))
@@ -59,7 +60,8 @@ namespace Game
                 if (face2.Equals(value))
                 {
                     face2 = token.Face1;
-                    hist.Add(token);
+                    Token aux = new Token(token.Face2, token.Face1);
+                    hist.Add(aux);
                     return;
                 }
             }
