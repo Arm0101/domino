@@ -26,7 +26,7 @@ namespace Game
             return tokens;
         }
 
-        public (Token, IFace) selectToken(ITable table, IValidator validator)
+        public (Token, IFace) selectToken(ITable table, History history)
         {
             List <IFace> curr_faces = new List<IFace>() { table.FaceRight(), table.FaceLeft()} ;
             if (curr_faces[0] == null && curr_faces[1] == null)
@@ -38,7 +38,7 @@ namespace Game
                 return (t, f);
             }
             foreach (Token token in tokens) {
-                if (validator.Validate(table, token)) {
+                if (table.Validate(this,token,history)) {
                     
                     IFace face = null;
 

@@ -18,7 +18,7 @@ namespace ConsoleInterface {
 
 
             InfoMonitor infoMonitor = new InfoMonitor();
-            Manager manager = new Manager(new NormalTable(),players, new RandomDistibute(10) , tokens, new NormalOrder(players),new NormalFinish(),new NormalWin(), new NormalValidator(), new History(), infoMonitor);
+            Manager manager = new Manager(new NormalTable(),players, new RandomDistibute(10) , tokens, new NormalOrder(players),new NormalFinish(),new NormalWin(), new History(), infoMonitor);
             manager.play();
             
 

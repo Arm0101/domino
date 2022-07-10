@@ -7,5 +7,6 @@ namespace Logic
         public IFace FaceLeft();
         public IFace FaceRight();
         public IEnumerable<Token> getHistory();
+        bool Validate(IPlayer player,Token token, History history);
     }
 }

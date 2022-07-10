@@ -9,20 +9,18 @@ namespace ConsoleInterface
         private IPlayer[] players;
         private IFinish finish;
         private History history;
-        private IValidator validator;
         private IOrder order;
         private IWin win;
         IMonitor infoMonitor;
         InfoHandler infoHandler;
         public Manager(ITable _table, IPlayer[] _players,IDistribute distribute, List<Token> tokens,IOrder _order,
-            IFinish _finish, IWin _win ,IValidator _validator ,History _history, IMonitor _infoMonitor)
+            IFinish _finish, IWin _win ,History _history, IMonitor _infoMonitor)
         {
             table = _table;
             players = _players;
             finish = _finish;
             history = _history;
             distribute.HandOutTokens(players, tokens);
-            validator = _validator;
             order = _order;
             win = _win;
             infoMonitor = _infoMonitor;
@@ -38,7 +36,7 @@ namespace ConsoleInterface
                 IPlayer player = order.GetPlayer(table,players, history);
                 Token token;
                 IFace val;
-                (token,val) = player.selectToken(table, validator);
+                (token,val) = player.selectToken(table,history);
                 if (token != null)
                 {
                     table.addToken(token, val);

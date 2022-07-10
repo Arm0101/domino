@@ -68,6 +68,17 @@ namespace Game
 
         }
 
+        public bool Validate(IPlayer player, Token token, History history) {
+
+            List<IFace> lastFaces = new List<IFace> { face1, face2 };
+
+            if (lastFaces.Count == 0) return true;
+
+            if (lastFaces.Contains(token.Face1) || lastFaces.Contains(token.Face2)) return true;
+
+            return false;
+        }
+
         public IFace FaceLeft()
         {
             return face1;
