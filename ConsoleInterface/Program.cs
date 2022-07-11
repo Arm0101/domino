@@ -11,7 +11,8 @@ namespace ConsoleInterface
     {
       
         static void Main(string[] args) {
-            List<Token> tokens = TokensGenerator.generateTokens(9).ToList();
+            List<Token> tokens = MixTokensGenerator.generateTokens(9).ToList();
+            
             IPlayer[] players = new IPlayer[4];
             players[0] = new NormalPlayer("01");
             players[1] = new NormalPlayer("02");
@@ -23,7 +24,7 @@ namespace ConsoleInterface
             IAction[] actions = { a, c};
 
             InfoMonitor infoMonitor = new InfoMonitor();
-            Manager manager = new Manager(new AdditionTable(),players, new ParImparDistribute(10) , tokens, new ReverseOrder(players),new NormalFinish(),new NormalWin(), actions ,new History(), infoMonitor);
+            Manager manager = new Manager(new NormalTable(),players, new RandomDistibute(10) , tokens, new NormalOrder(players),new NormalFinish(),new NormalWin(), actions ,new History(), infoMonitor);
             manager.play();
             
 
