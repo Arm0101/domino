@@ -13,12 +13,17 @@ namespace Game
             }
            
             if (history.TokensHistory.Count >= players.Length) {
-                
-                for (int i = history.TokensHistory.Count - players.Length; i < history.TokensHistory.Count; i++)
-                {
+               List <string> visited = new List <string>();
+                int count = 0;
+                for (int i = history.TokensHistory.Count - 1; i >= 0; i--) {
+                    string id = history.IdHistory[i];
+                    if (visited.Contains(id)) continue;
+                    visited.Add(id);
+                    count++;
                     if (history.TokensHistory[i] != null) return false;
-                }
-                return true;
+                    if (count == players.Length) return true;
+
+                 }
             }
 
             return false;

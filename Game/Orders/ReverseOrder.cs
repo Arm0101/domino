@@ -22,7 +22,7 @@ namespace Game.Orders
             int index = history.TokensHistory.Count - 1;
             bool currentPast = false;
             string currentId = "";
-            if (index > 0)
+            if (index >= 0)
             {
                 currentId = history.IdHistory[index];
                 currentPast =  history.TokensHistory[index] == null;
@@ -53,7 +53,7 @@ namespace Game.Orders
 
         public bool isPast(History history , IPlayer player) {
             int n = history.IdHistory.Count;
-            for (int i = n - 1; i > 0; i--)
+            for (int i = n - 1; i >= 0; i--)
             {
                 if (!player.getID().Equals(history.IdHistory[i])) continue;
                 if (object.Equals(history.TokensHistory[i], null)) return true;
