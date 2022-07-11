@@ -8,7 +8,7 @@ namespace Game
         {
 
             
-            if (isPast(player, history))
+            if (isPast(player, history) && tokens.Count > 0)
             {
                 Random r = new Random();
                 int index = r.Next(tokens.Count);

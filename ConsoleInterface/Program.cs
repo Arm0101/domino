@@ -23,7 +23,7 @@ namespace ConsoleInterface
             IAction[] actions = { a, c};
 
             InfoMonitor infoMonitor = new InfoMonitor();
-            Manager manager = new Manager(new NormalTable(),players, new ParImparDistribute(10) , tokens, new ReverseOrder(players),new FinilizedByNPlayers(),new NormalWin(), actions ,new History(), infoMonitor);
+            Manager manager = new Manager(new AdditionTable(),players, new ParImparDistribute(10) , tokens, new ReverseOrder(players),new NormalFinish(),new NormalWin(), actions ,new History(), infoMonitor);
             manager.play();
             
 
