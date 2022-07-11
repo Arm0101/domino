@@ -15,8 +15,18 @@ namespace ConsoleInterface
             
             tokens.ForEach(t => printToken(t));
             Console.WriteLine();
-            
-            Console.WriteLine("->[{0}:{1}]", table.FaceLeft().getRepresentation(), table.FaceRight().getRepresentation());
+            string left = "";
+            string right = "";
+            if (table.FaceLeft() == null && table.FaceRight() == null)
+            {
+                left = right = "-";
+            }
+            else
+            {
+                left = table.FaceLeft().getRepresentation();
+                right = table.FaceRight().getRepresentation();
+            }
+            Console.WriteLine("->[{0}:{1}]", left, right);
 
         }
         public static void printPlayersTokens(List<IPlayer> players) {

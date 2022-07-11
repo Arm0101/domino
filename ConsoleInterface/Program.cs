@@ -1,9 +1,12 @@
-﻿using System;
-using Logic;
+﻿using Logic;
 using Game;
-namespace ConsoleInterface {
+using Game.Actions;
+using Game.Orders;
+using Game.WinConditions;
+namespace ConsoleInterface
+{
 
- 
+
     public class Program
     {
       
@@ -15,10 +18,11 @@ namespace ConsoleInterface {
             players[1] = new NormalPlayer("02");
             players[2] = new NormalPlayer("03");
             players[3] = new NormalPlayer("04");
-
+            Actions a = new Actions();
+            IAction[] actions = { a };
 
             InfoMonitor infoMonitor = new InfoMonitor();
-            Manager manager = new Manager(new NormalTable(),players, new RandomDistibute(10) , tokens, new NormalOrder(players),new NormalFinish(),new NormalWin(), new History(), infoMonitor);
+            Manager manager = new Manager(new NormalTable(),players, new RandomDistibute(10) , tokens, new ReverseOrder(players),new NormalFinish(),new NormalWin(), actions ,new History(), infoMonitor);
             manager.play();
             
 

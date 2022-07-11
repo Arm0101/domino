@@ -13,8 +13,9 @@ namespace ConsoleInterface
         private IWin win;
         IMonitor infoMonitor;
         InfoHandler infoHandler;
+        IAction[] actions;
         public Manager(ITable _table, IPlayer[] _players,IDistribute distribute, List<Token> tokens,IOrder _order,
-            IFinish _finish, IWin _win ,History _history, IMonitor _infoMonitor)
+            IFinish _finish, IWin _win, IAction[] _actions,History _history, IMonitor _infoMonitor)
         {
             table = _table;
             players = _players;
@@ -24,6 +25,7 @@ namespace ConsoleInterface
             order = _order;
             win = _win;
             infoMonitor = _infoMonitor;
+            actions = _actions;
             infoHandler = new InfoHandler();
         }
       
@@ -37,13 +39,17 @@ namespace ConsoleInterface
                 Token token;
                 IFace val;
                 (token,val) = player.selectToken(table,history);
-                if (token != null)
-                {
-                    table.addToken(token, val);
-                }
-               
+
+                if (!table.Validate(player, token, history)) token = null;
                 
                 history.log(player.getID(), token);
+
+                foreach(var action in actions)
+                {
+                    action.doSomething(player, token, val,table, players, history);
+                }
+
+
                 infoHandler.Update(table, history, players.ToList(), winners,false);
             }
 

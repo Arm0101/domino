@@ -1,6 +1,6 @@
 ﻿using Logic;
 
-namespace Game
+namespace Game.WinConditions
 {
     public class NormalWin : IWin
     {
@@ -12,10 +12,10 @@ namespace Game
             {
 
 
-                if (item.getTokens().ToList().Count == 0) return new IPlayer[] {item};
+                if (item.getTokens().ToList().Count == 0) return new IPlayer[] { item };
                 int aux = 0;
-               
-                
+
+
                 foreach (var t in item.getTokens().ToList())
                 {
                     aux += getValue(t);

@@ -11,6 +11,11 @@ namespace Game
             tokens = new List<Token>();
             id = _id;
         }
+        public void RemoveToken(Token token)
+        {
+            if (tokens.Contains(token))
+                tokens.Remove(token);
+        }
         public void addToken(Token token)
         {
             tokens.Add(token);
@@ -26,25 +31,19 @@ namespace Game
             return tokens;
         }
 
-        public (Token, IFace) selectToken(ITable table, History history)
+        public (Token, IFace ) selectToken(ITable table, History history)
         {
             List <IFace> curr_faces = new List<IFace>() { table.FaceRight(), table.FaceLeft()} ;
-            if (curr_faces[0] == null && curr_faces[1] == null)
-            {
 
-                IFace f = tokens[0].Face1;
-                Token t = tokens[0];
-                tokens.Remove(t);
-                return (t, f);
-            }
             foreach (Token token in tokens) {
                 if (table.Validate(this,token,history)) {
-                    
+
                     IFace face = null;
 
                     if (curr_faces.Contains(token.Face1)) face = token.Face1;
                     if (curr_faces.Contains(token.Face2)) face = token.Face2;
-                    tokens.Remove(token);
+                    
+                   
                     return (token, face);
                 }
                 

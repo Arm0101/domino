@@ -4,23 +4,21 @@ namespace Game
 {
     public class NormalOrder : IOrder
     {
-        private int[] order;
-        private int actual_turn = -1;
-        public NormalOrder(IPlayer[] players) {
-            order = new int[players.Length];
-            for (int i = 0; i < players.Length; i++)
-            {
-                order[i]= i;
-            }
         
+        private int actual_turn = -1;
+        private int n_players; 
+        public NormalOrder(IPlayer[] players) {
+            
+            n_players = players.Length;
         }
         public IPlayer GetPlayer(ITable table, IPlayer[] players, History history)
         {
-       
-            if (actual_turn + 1 > order.Length - 1)
+            int dif = n_players - players.Length;
+            actual_turn -= dif;
+            if (actual_turn + 1 > players.Length - 1)
                 actual_turn = -1;
 
-            return players[order[++actual_turn]];
+            return players[++actual_turn];
         
     }
     }
