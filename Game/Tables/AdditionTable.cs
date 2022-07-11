@@ -10,6 +10,13 @@ namespace Game
         {
             hist = new List<Token>();
         }
+
+        private AdditionTable(IFace f1, IFace f2, List<Token> h)
+        {
+            face1 = f1.GetInstance();
+            face2 = f2.GetInstance();
+            hist = new List<Token>(h);
+        }
         public void addToken(Token token, IFace value = null)
         {
             if (face1 == null && face2 == null)
@@ -61,6 +68,11 @@ namespace Game
         public IEnumerable<Token> getHistory()
         {
             return hist;
+        }
+        public ITable GetInstance()
+        {
+            
+            return new AdditionTable(face1, face2, hist);
         }
     }
 }

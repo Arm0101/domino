@@ -7,6 +7,12 @@ namespace Game
         private IFace ? face1;
         private IFace ? face2;
         private List<Token> hist;
+
+        private NormalTable(IFace f1, IFace f2, List<Token> h) { 
+            face1 = f1.GetInstance();
+            face2 = f2.GetInstance();
+            hist = new List<Token>(h);
+        }
         public NormalTable() {
             hist = new List<Token>();
         }
@@ -92,6 +98,9 @@ namespace Game
         public IEnumerable<Token> getHistory()
         {
             return hist;
+        }
+        public ITable GetInstance() { 
+            return new NormalTable(face1,face2,hist);
         }
     }
 }

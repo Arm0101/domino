@@ -6,6 +6,13 @@ namespace Game
     {
         private int value;
         private char repr;
+
+        private CharFace(int value, char repr)
+        {
+            this.value = value;
+            this.repr = repr;
+        }
+
         public CharFace(char val)
         {
             repr = val;
@@ -30,6 +37,9 @@ namespace Game
         public string getRepresentation()
         {
             return repr.ToString();
+        }
+        public IFace GetInstance() {
+           return new CharFace(value,repr);
         }
 
     }

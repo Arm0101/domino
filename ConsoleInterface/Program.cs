@@ -11,11 +11,12 @@ namespace ConsoleInterface
     {
       
         static void Main(string[] args) {
-            List<Token> tokens = MixTokensGenerator.generateTokens(9).ToList();
-            
+            List<Token> tokens = NumericTokensGenerator.generateTokens(9).ToList();
+         
+
             IPlayer[] players = new IPlayer[4];
-            players[0] = new NormalPlayer("01");
-            players[1] = new NormalPlayer("02");
+            players[0] = new AlmostSmartPlayer("01");
+            players[1] = new AlmostSmartPlayer("02");
             players[2] = new NormalPlayer("03");
             players[3] = new NormalPlayer("04");
             NormalAction a = new NormalAction();

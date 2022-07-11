@@ -20,6 +20,9 @@ namespace Game
         public string getRepresentation() {
             return value.ToString();
         }
+        public IFace GetInstance() { 
+            return new NormalFace(value);
+        }
 
     }
 

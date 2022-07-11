@@ -4,10 +4,10 @@ namespace Game
 {
     public class NormalPlayer : IPlayer
     {
-        private string id;
-        List<Token> tokens;
+        protected string id;
+        protected List<Token> tokens;
         public NormalPlayer(string _id) {
-
+            
             tokens = new List<Token>();
             id = _id;
         }
@@ -31,7 +31,7 @@ namespace Game
             return tokens;
         }
 
-        public (Token, IFace ) selectToken(ITable table, History history)
+        public virtual (Token, IFace ) selectToken(ITable table, History history)
         {
             List <IFace> curr_faces = new List<IFace>() { table.FaceRight(), table.FaceLeft()} ;
 

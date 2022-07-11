@@ -8,5 +8,6 @@ namespace Logic
         public IFace FaceRight();
         public IEnumerable<Token> getHistory();
         bool Validate(IPlayer player,Token ? token, History history);
+        public ITable GetInstance();
     }
 }

@@ -10,5 +10,7 @@ namespace Logic
     {
         public int GetValue();
         public string getRepresentation();
+
+        public IFace GetInstance();
     }
 }
