@@ -4,9 +4,10 @@ namespace Game
 {
     public class FinalizedByPasses : IFinish
     {
-        public bool Finish(ITable table, IPlayer[] players, History history)
+        public bool Finish(ITable table, IEnumerable<IPlayer> p, History history)
         {
-            if (players.Length == 0) return true;
+            IPlayer[] players = p.ToArray();
+            
             foreach (var player in players)
             {
                 int count = 0;

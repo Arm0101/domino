@@ -25,32 +25,40 @@ namespace ConsoleInterface
 
         public virtual void OnNext(Info value)
         {
-            Console.Clear();
-            Print.printTable(value.Table);
-            Console.WriteLine();
-
-            if (value.LastToken != null)
+            if (value.Change)
             {
-                Console.Write("{0} jugo: ", value.LastPlayerId);
-                Print.printToken(value.LastToken);
+                Console.Clear();
+                Print.printTable(value.Table);
                 Console.WriteLine();
-            }
-            else {
-                Console.WriteLine("{0} se paso", value.LastPlayerId);
-            }
 
-            Console.WriteLine();
-            Print.printPlayersTokens(value.PlayersInfo);
-            Console.WriteLine();
-
-            if (value.Finalized) {
-                foreach (var p in value.Winners)
+                if (value.LastToken != null)
                 {
-                    Console.WriteLine("El jugador {0} ha ganado ", p.getID());
+                    Console.Write("{0} jugo: ", value.LastPlayerId);
+                    Print.printToken(value.LastToken);
+                    Console.WriteLine();
                 }
-            
+                else
+                {
+                    Console.WriteLine("{0} se paso", value.LastPlayerId);
+                }
+
+                Console.WriteLine();
+                Print.printPlayersTokens(value.PlayersInfo);
+                Console.WriteLine();
+              
+                if (value.Finalized)
+                {
+                    foreach (var p in value.Winners)
+                    {
+                        Console.WriteLine("El jugador {0} ha ganado ", p.getID());
+                    }
+
+                }
+
+              
             }
 
+            Console.WriteLine(value.Notification);
             Console.ReadKey();
         }
     }

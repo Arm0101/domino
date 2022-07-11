@@ -8,17 +8,19 @@ namespace Game.Orders
         private int actual_turn;
         private bool increment;
         private int n_players;
-        public ReverseOrder(IPlayer[] players)
+        public ReverseOrder(IEnumerable<IPlayer> players)
         {
             actual_turn = -1;
-            n_players = players.Length;
+            n_players = players.ToArray().Length;
             increment = true;
         }
 
-        public IPlayer GetPlayer(ITable table, IPlayer[] players, History history)
+        public IPlayer GetPlayer(ITable table, IEnumerable<IPlayer> p, History history)
         {
+            IPlayer[] players = p.ToArray();
+
             //verifico si el ultimo jugador se paso
-            
+
             int index = history.TokensHistory.Count - 1;
             bool currentPast = false;
             string currentId = "";
@@ -30,6 +32,7 @@ namespace Game.Orders
 
             }
             int dif = n_players - players.Length;
+            n_players -= dif;
             actual_turn -= dif;
             do
             {
@@ -56,6 +59,7 @@ namespace Game.Orders
             for (int i = n - 1; i >= 0; i--)
             {
                 if (!player.getID().Equals(history.IdHistory[i])) continue;
+                if (history.TokensHistory[i] != null) return false;
                 if (object.Equals(history.TokensHistory[i], null)) return true;
             }
             return false;

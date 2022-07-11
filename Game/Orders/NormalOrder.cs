@@ -7,18 +7,20 @@ namespace Game
         
         private int actual_turn = -1;
         private int n_players; 
-        public NormalOrder(IPlayer[] players) {
+        public NormalOrder(IEnumerable<IPlayer> players) {
             
-            n_players = players.Length;
+            n_players = players.ToArray().Length;
         }
-        public IPlayer GetPlayer(ITable table, IPlayer[] players, History history)
+        public IPlayer GetPlayer(ITable table, IEnumerable<IPlayer> p, History history)
         {
+            IPlayer[] players = p.ToArray();
             int dif = n_players - players.Length;
+            n_players -= dif;
             actual_turn -= dif;
-            if (actual_turn + 1 > players.Length - 1)
+            if (actual_turn + 1 == players.Length)
                 actual_turn = -1;
 
-            return players[++actual_turn];
+             return players[++actual_turn];
         
     }
     }

@@ -4,9 +4,10 @@ namespace Game.WinConditions
 {
     public class NormalWin : IWin
     {
-        public IEnumerable<IPlayer> getWiner(ITable table, IPlayer[] players, History history)
+        public IEnumerable<IPlayer> getWiner(ITable table, IEnumerable<IPlayer> p, History history)
         {
-            IPlayer[] winner = new IPlayer[1];
+            IPlayer[] players = p.ToArray();
+            List<IPlayer> winner = new List<IPlayer>();
             int points = int.MaxValue;
             foreach (var item in players)
             {
@@ -21,10 +22,16 @@ namespace Game.WinConditions
                     aux += getValue(t);
 
                 }
+                if (aux == points)
+                {
+                    
+                    winner.Add(item);
+                }
                 if (aux < points)
                 {
                     points = aux;
-                    winner[0] = item;
+                    winner.Clear();
+                    winner.Add(item);
                 }
             }
             return winner;

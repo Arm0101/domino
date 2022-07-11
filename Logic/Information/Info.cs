@@ -15,8 +15,8 @@ namespace Logic
         private Token lastToken;
         private List<IPlayer> winners;
         private bool finalized;
-
-    
+        private string notification;
+        private bool change;
 
        
         public void UpdateInfo(ITable _table, History _history, List<IPlayer> _players, List<IPlayer> _winners, bool _finalized) {
@@ -25,15 +25,20 @@ namespace Logic
             players_info = _players;
             winners = _winners;
             finalized = _finalized;
-
+            notification = "";
             setLastPlayerID();
             setLastToken();
+            change = true;
         }
-
+        public void addNotification(string not) {
+            notification = not;
+            change = false;
+        }
         public ITable Table { get { return table; } }
         public History History { get { return history; } }
         public List<IPlayer> PlayersInfo { get { return players_info; } }
 
+        public string Notification { get { return notification; } }
         public Token LastToken { get { return lastToken; } }
 
         public bool Finalized { get { return finalized; } }
@@ -42,7 +47,7 @@ namespace Logic
 
         public string LastPlayerId { get { return lastPlayerId; } }
 
-
+        public bool Change { get { return change; } } 
         private void setLastPlayerID()
         {
             if (history.IdHistory.Count > 0)

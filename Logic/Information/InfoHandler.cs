@@ -5,8 +5,10 @@ namespace Logic
     {
         private List<IObserver<Info>> observers;
         private Info game_info;
+       
         public InfoHandler() { 
             observers = new List<IObserver<Info>>();
+            game_info = new Info();
         }
         public IDisposable Subscribe(IObserver<Info> observer)
         {
@@ -19,11 +21,18 @@ namespace Logic
         }
 
         public void Update(ITable table, History history, List<IPlayer> players , List<IPlayer> winners, bool finalized) { 
-            Info info = new Info();
-            info.UpdateInfo(table, history, players, winners, finalized);
+           
+            game_info.UpdateInfo(table, history, players, winners, finalized);
             foreach(var observer in observers)
-                observer.OnNext(info);
+                observer.OnNext(game_info);
 
+        }
+
+        public void Notify(string notifi) {
+            if (String.IsNullOrEmpty(notifi)) return;
+            game_info.addNotification(notifi);
+            foreach (var observer in observers)
+                observer.OnNext(game_info);
         }
 
     }

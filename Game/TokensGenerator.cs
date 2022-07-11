@@ -13,11 +13,13 @@ namespace Logic
             {
                 for (int j = i; j <= n; j++)
                 {
+
+                    IFace face1 = new NormalFace(i);
+                    IFace face2 = new NormalFace(j);
                    
-                     IFace face1 = new NormalFace(i);
-                     IFace face2  = new NormalFace(j);
-                 
-                    tokens.Add(new Token(face1,face2));
+                    tokens.Add(new Token(face1, face2));
+                    
+                    
 
 
                 }

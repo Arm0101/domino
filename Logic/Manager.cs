@@ -1,41 +1,45 @@
 ﻿using System;
 using Logic;
-namespace ConsoleInterface
+namespace Logic
 {
     public class Manager
     {
 
         private ITable table;
-        private IPlayer[] players;
+        private List<IPlayer> players;
         private IFinish finish;
         private History history;
         private IOrder order;
         private IWin win;
         IMonitor infoMonitor;
-        InfoHandler infoHandler;
+        static InfoHandler infoHandler;
         IAction[] actions;
-        public Manager(ITable _table, IPlayer[] _players,IDistribute distribute, List<Token> tokens,IOrder _order,
+        private List<Token> tokens;
+        public Manager(ITable _table, ICollection<IPlayer> _players,IDistribute distribute, List<Token> _tokens,IOrder _order,
             IFinish _finish, IWin _win, IAction[] _actions,History _history, IMonitor _infoMonitor)
         {
             table = _table;
-            players = _players;
+            players = _players.ToList();
             finish = _finish;
             history = _history;
-            distribute.HandOutTokens(players, tokens);
+            distribute.HandOutTokens(players, _tokens);
+            tokens = _tokens;
             order = _order;
             win = _win;
             infoMonitor = _infoMonitor;
             actions = _actions;
             infoHandler = new InfoHandler();
         }
-      
-   
+
+        public static void Notify(string noti) {
+            infoHandler.Notify(noti);
+        }
         public void play() {
             List<IPlayer> winners = new List<IPlayer> ();
             infoMonitor.Subscribe(infoHandler);
-            while (!finish.Finish(table,players, history))
+            while (!finish.Finish(table,players.ToArray(), history))
             {
-                IPlayer player = order.GetPlayer(table,players, history);
+                IPlayer player = order.GetPlayer(table,players.ToArray(), history);
                 Token token;
                 IFace val;
                 (token,val) = player.selectToken(table,history);
@@ -46,7 +50,7 @@ namespace ConsoleInterface
 
                 foreach(var action in actions)
                 {
-                    action.doSomething(player, token, val,table, players, history);
+                    action.doSomething(player, token, val,table, players,tokens, history);
                 }
 
 

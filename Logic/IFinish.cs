@@ -2,6 +2,6 @@
 {
     public interface IFinish
     {
-        bool Finish(ITable table, IPlayer[] players, History history);
+        bool Finish(ITable table, IEnumerable<IPlayer> players, History history);
     }
 }

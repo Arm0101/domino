@@ -8,6 +8,6 @@ namespace Logic
 {
     public interface IOrder
     {
-       public IPlayer GetPlayer(ITable table, IPlayer[] players, History history);
+       public IPlayer GetPlayer(ITable table, IEnumerable<IPlayer> players, History history);
     }
 }
