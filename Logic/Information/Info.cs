@@ -45,9 +45,11 @@ namespace Logic
 
         private void setLastPlayerID()
         {
+            if (history.IdHistory.Count > 0)
             lastPlayerId = history.IdHistory[history.IdHistory.Count - 1];
         }
         private void setLastToken() { 
+            if  (history.TokensHistory.Count > 0)
             lastToken = history.TokensHistory[history.TokensHistory.Count - 1];
         }
     }

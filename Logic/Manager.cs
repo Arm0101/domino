@@ -39,7 +39,7 @@ namespace ConsoleInterface
                 Token token;
                 IFace val;
                 (token,val) = player.selectToken(table,history);
-
+                
                 if (!table.Validate(player, token, history)) token = null;
                 
                 history.log(player.getID(), token);
