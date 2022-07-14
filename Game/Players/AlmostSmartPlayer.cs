@@ -45,7 +45,7 @@ namespace Game
                     //se crea una mesa auxiliar y se agrega la ficha
                     ITable aux_table = table.GetInstance();
                     aux_table.addToken(t, curr_faces[0]);
-                    currentCount = CountValidTokens(aux_table, curr_faces[0], history,t);
+                    currentCount = CountValidTokens(aux_table, history);
                     //si la ficha deja al jugador con mas fichas validas se actualiza la mejor ficha
                     if (currentCount >= count)
                     {
@@ -59,7 +59,7 @@ namespace Game
                 {
                     ITable aux_table = table.GetInstance();
                     aux_table.addToken(t, curr_faces[1]);
-                    currentCount = CountValidTokens(aux_table, curr_faces[1], history, t);
+                    currentCount = CountValidTokens(aux_table, history);
                     if (currentCount >= count)
                     {
                         count = currentCount;
@@ -74,12 +74,13 @@ namespace Game
         }
 
         //contar la cantidad de fichas validas para una mesa
-        private int CountValidTokens(ITable table , IFace face,History history, Token token)
+        private int CountValidTokens(ITable table, History history)
         {
             int count = 0;
             foreach (var t in tokens)
             {
-                if (table.Validate(this, t, face, history)) count++;
+                if (table.Validate(this, t, table.FaceLeft(), history)) { count++; continue; }
+                if (table.Validate(this, t, table.FaceRight(), history)) count++;
             }
             return count;
         }
