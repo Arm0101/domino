@@ -45,7 +45,7 @@ namespace ConsoleInterface
                 Console.WriteLine();
                 Print.printPlayersTokens(value.PlayersInfo);
                 Console.WriteLine();
-              
+                
                 if (value.Finalized)
                 {
                     foreach (var p in value.Winners)

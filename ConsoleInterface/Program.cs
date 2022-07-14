@@ -22,10 +22,10 @@ namespace ConsoleInterface
             NormalAction a = new NormalAction();
             RemovePlayer b = new RemovePlayer();
             AddTokenToPlayer c = new AddTokenToPlayer();
-            IAction[] actions = { a, c};
+            IAction[] actions = { a};
 
             InfoMonitor infoMonitor = new InfoMonitor();
-            Manager manager = new Manager(new NormalTable(),players, new RandomDistibute(10) , tokens, new NormalOrder(players),new NormalFinish(),new NormalWin(), actions ,new History(), infoMonitor);
+            Manager manager = new Manager(new NormalTable(),players, new RandomDistibute(10) , tokens, new NormalOrder(players),new NormalFinish(),new WinByPasses(), actions ,new History(), infoMonitor);
             manager.play();
             
 
