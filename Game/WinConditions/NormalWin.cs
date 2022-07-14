@@ -1,9 +1,10 @@
 ﻿using Logic;
 
-namespace Game.WinConditions
+namespace Game
 {
     public class NormalWin : IWin
     {
+        public string Description() => "Gana el que con menos puntos";
         public IEnumerable<IPlayer> getWiner(ITable table, IEnumerable<IPlayer> p, History history)
         {
             IPlayer[] players = p.ToArray();

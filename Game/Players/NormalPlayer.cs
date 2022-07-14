@@ -4,6 +4,8 @@ namespace Game
 {
     public class NormalPlayer : IPlayer
     {
+
+        public virtual string Description() => "Juega la primera ficha valida";
         protected string id;
         protected List<Token> tokens;
         public NormalPlayer(string _id) {

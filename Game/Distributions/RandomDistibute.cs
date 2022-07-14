@@ -5,6 +5,7 @@ namespace Game
     public class RandomDistibute : IDistribute
     {
         int n_players;
+        public string Description() => "Se distribuyen fichas de manera aleatoria";
         public RandomDistibute(int n)
         {
             n_players = n;     

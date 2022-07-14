@@ -1,35 +1,31 @@
 ﻿using Logic;
 using Game;
-
-using Game.Orders;
-using Game.WinConditions;
 namespace ConsoleInterface
 {
 
 
     public class Program
-    {
-      
+    {   
         static void Main(string[] args) {
-            List<Token> tokens = NumericTokensGenerator.generateTokens(9).ToList();
-         
-
-            IPlayer[] players = new IPlayer[4];
-            players[0] = new AlmostSmartPlayer("01");
-            players[1] = new AlmostSmartPlayer("02");
-            players[2] = new NormalPlayer("03");
-            players[3] = new NormalPlayer("04");
-            NormalAction a = new NormalAction();
-            RemovePlayer b = new RemovePlayer();
-            AddTokenToPlayer c = new AddTokenToPlayer();
-            IAction[] actions = { a};
-
-            InfoMonitor infoMonitor = new InfoMonitor();
-            Manager manager = new Manager(new NormalTable(),players, new RandomDistibute(10) , tokens, new NormalOrder(players),new NormalFinish(),new WinByPasses(), actions ,new History(), infoMonitor);
-            manager.play();
             
+            ICollection<IPlayer> players = null;
+            ITable table = null;
+            IDistribute distribute = null;
+            IOrder order = null;
+            List<Token> tokens = null;
+            IFinish finish = null;
+            IWin win = null;
+            IEnumerable<IAction> actions = null;
+            IMonitor monitor = new InfoMonitor();
 
-           
+
+            GameSettings.SetOptions(out table, out players,out distribute, out order, out tokens, out finish,out win, out actions);
+
+            Manager manager = GameSettings.BuildGame(table, players, distribute, order, tokens, finish, win, actions, monitor);
+            manager.play();
+
+
+
         }
         
     }

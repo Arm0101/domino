@@ -4,6 +4,7 @@ namespace Game
 {
     public class AddTokenToPlayer : IAction
     {
+        public string Description() => "Se le agrega una ficha al jugador si se pasa"; 
         public void doSomething(IPlayer player, Token token, IFace face, ITable table, ICollection<IPlayer> players, List<Token> tokens, History history)
         {
 

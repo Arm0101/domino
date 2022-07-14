@@ -4,6 +4,8 @@ namespace Game
     {
     public class PlayMostValuable : NormalPlayer
     {
+
+        public override string Description() => "Juega la ficha que mas valor posea entre las fichas validas";
         public PlayMostValuable(string _id) : base(_id)
         {
         }

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public interface IOrder
+    public interface IGenerator
     {
         public string Description();
-        public IPlayer GetPlayer(ITable table, IEnumerable<IPlayer> players, History history);
+        public IEnumerable<Token> generateTokens(int n);
     }
+    
 }

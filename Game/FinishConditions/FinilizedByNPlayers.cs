@@ -4,6 +4,7 @@ namespace Game
 {
     public class FinilizedByNPlayers : IFinish
     {
+        public string Description() => "El juego finaliza cuando queda 1 solo jugador";
         public bool Finish(ITable table, IEnumerable<IPlayer> p, History history) {
             IPlayer[] players = p.ToArray();
             

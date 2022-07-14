@@ -6,6 +6,8 @@ namespace Game
         private IFace? face1;
         private IFace? face2;
         private List<Token> hist;
+
+        public string Description() => "Una ficha es valida si la suma de los valores de sus caras es igual a una de las caras disponibles para jugar";
         public AdditionTable()
         {
             hist = new List<Token>();

@@ -3,6 +3,7 @@ namespace Game
 {
     public class ParImparDistribute:IDistribute
     {
+        public string Description() => "Todas las fichas que se le reparten a un jugador tienen valor par o impar ";
         int n_players;
         public ParImparDistribute(int n)
         {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using Game;
 namespace Logic
 {
-    public class NumericTokensGenerator
+    public class NumericTokensGenerator:IGenerator
     {
-        public static IEnumerable<Token> generateTokens(int n)
+        public string Description() => "Genera las fichas clasicas";
+        public IEnumerable<Token> generateTokens(int n)
         {
            List<Token> tokens = new List<Token>();
 
@@ -34,10 +34,11 @@ namespace Logic
 
 
 
-    public class MixTokensGenerator
+    public class MixTokensGenerator:IGenerator
     {
-        
-        public static IEnumerable<Token> generateTokens(int n)
+
+        public string Description() => "Genera fichas con una cara numerica y otra cara con caracteres";
+        public  IEnumerable<Token> generateTokens(int n)
 
         {
             char[] chars = new char[26];      

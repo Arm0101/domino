@@ -13,15 +13,15 @@ namespace Logic
         private IWin win;
         IMonitor infoMonitor;
         static InfoHandler infoHandler;
-        IAction[] actions;
+        IEnumerable<IAction> actions;
         private List<Token> tokens;
         public Manager(ITable _table, ICollection<IPlayer> _players,IDistribute distribute, List<Token> _tokens,IOrder _order,
-            IFinish _finish, IWin _win, IAction[] _actions,History _history, IMonitor _infoMonitor)
+            IFinish _finish, IWin _win, IEnumerable<IAction> _actions, IMonitor _infoMonitor)
         {
             table = _table;
             players = _players.ToList();
             finish = _finish;
-            history = _history;
+            
             distribute.HandOutTokens(players, _tokens);
             tokens = _tokens;
             order = _order;
@@ -29,6 +29,7 @@ namespace Logic
             infoMonitor = _infoMonitor;
             actions = _actions;
             infoHandler = new InfoHandler();
+            history = new History();
         }
 
         public static void Notify(string noti) {

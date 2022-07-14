@@ -4,6 +4,7 @@ namespace Game
 {
     public class FinalizedByPasses : IFinish
     {
+        public string Description() => "El juego finaliza si un juagdor llega a los 2 pases";
         public bool Finish(ITable table, IEnumerable<IPlayer> p, History history)
         {
             IPlayer[] players = p.ToArray();

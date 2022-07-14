@@ -1,10 +1,11 @@
 ﻿using Logic;
 
-namespace Game.Orders
+namespace Game
 {
     public class ReverseOrder:IOrder
     {
 
+        public string Description() => "Se cambia el orden cada vez que un jugador se pasa";
         private int actual_turn;
         private bool increment;
         private int n_players;

@@ -4,6 +4,7 @@ namespace Game
 {
     public class AlmostSmartPlayer : NormalPlayer
     {
+        public override string Description() => "Juega la ficha que lo deje con mas opciones despues de la jugada";
         public AlmostSmartPlayer(string _id) : base(_id)
         {
         }

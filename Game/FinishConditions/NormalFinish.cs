@@ -4,7 +4,7 @@ namespace Game
 {
     public class NormalFinish : IFinish
     {
-
+        public string Description() => "El juego termina cuando un jugador se queda sin fichas o todos los jugadores se pasan";
         public bool Finish(ITable table, IEnumerable<IPlayer> p, History history)
         {
             IPlayer[] players = p.ToArray();

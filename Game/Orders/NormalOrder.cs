@@ -4,7 +4,7 @@ namespace Game
 {
     public class NormalOrder : IOrder
     {
-        
+        public string Description() => "Orden clasico";
         private int actual_turn = -1;
         private int n_players; 
         public NormalOrder(IEnumerable<IPlayer> players) {

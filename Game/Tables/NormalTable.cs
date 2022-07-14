@@ -8,6 +8,7 @@ namespace Game
         private IFace ? face2;
         private List<Token> hist;
 
+        public string Description() => "Las fichas se validan y se agregan a la mesa de la forma clasica";
         private NormalTable(IFace f1, IFace f2, List<Token> h) { 
             face1 = f1.GetInstance();
             face2 = f2.GetInstance();

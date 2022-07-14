@@ -4,6 +4,7 @@ namespace Game
 {
     public class WinByPasses : IWin
     {
+        public string Description() => "Gana el juagdor con menos pases";
         public IEnumerable<IPlayer> getWiner(ITable table, IEnumerable<IPlayer> players, History history)
         {
             List<IPlayer> winners = new List<IPlayer>();
