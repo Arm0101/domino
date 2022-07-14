@@ -1,5 +1,6 @@
 ﻿namespace Logic
 {
+    //define cuando se termina el juego
     public interface IFinish
     {
         public string Description();

@@ -2,6 +2,7 @@
 
 namespace Logic
 {
+    //define que jugadores son los ganadores
     public interface IWin
     {
         public string Description();

@@ -19,6 +19,7 @@ namespace Logic
         private bool change;
 
        
+        //actualizar el estado del juego
         public void UpdateInfo(ITable _table, History _history, List<IPlayer> _players, List<IPlayer> _winners, bool _finalized) {
             table = _table;
             history = _history;
@@ -30,6 +31,7 @@ namespace Logic
             setLastToken();
             change = true;
         }
+        //agregar notificacion
         public void addNotification(string not) {
             notification = not;
             change = false;
@@ -48,11 +50,13 @@ namespace Logic
         public string LastPlayerId { get { return lastPlayerId; } }
 
         public bool Change { get { return change; } } 
+        //establecer el jugador que hizo la ultima jugada
         private void setLastPlayerID()
         {
             if (history.IdHistory.Count > 0)
             lastPlayerId = history.IdHistory[history.IdHistory.Count - 1];
         }
+        //establcer la ultima ficha que se jugo
         private void setLastToken() { 
             if  (history.TokensHistory.Count > 0)
             lastToken = history.TokensHistory[history.TokensHistory.Count - 1];

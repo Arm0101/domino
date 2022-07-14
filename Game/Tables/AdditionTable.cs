@@ -19,8 +19,9 @@ namespace Game
             face2 = f2.GetInstance();
             hist = new List<Token>(h);
         }
-        public void addToken(Token token, IFace value = null)
+        public void addToken(Token token, IFace face)
         {
+            //si no se ha jugado aun se agrega la ficha
             if (face1 == null && face2 == null)
             {
                 face1 = token.Face1;
@@ -28,16 +29,16 @@ namespace Game
                 hist.Add(token);
                 return;
             }
-            int val = token.Face1.GetValue() + token.Face2.GetValue();
-         
-                if (face1.GetValue().Equals(val))
+                //si la cara 1 es igual a la cara por donde se va a jugar
+                if (face1.Equals(face))
                 {
+                    //se actualiza el valor de la cara por donde se puede jugar
                     face1 = token.Face1;
-                  
+                    //se agrega al principio de la lista
                     hist.Insert(0, token);
                     return;
                 }
-                if (face2.GetValue().Equals(val))
+                if (face2.Equals(face))
                 {
 
                     face2 = token.Face2;
@@ -48,13 +49,19 @@ namespace Game
               
 
 
-        public bool Validate(IPlayer player, Token? token, History history)
+        public bool Validate(IPlayer player, Token? token, IFace face, History history)
         {
-
+            
             if (token is null) return false;
+            //si no hay fichas en la mesa cualquier ficha sera valida
             if (face1 is null || face2 is null) return true;
+
+            //se comprueba que la cara que se quiere validar sea una de las dispoibles para jugar
+            if (!face.Equals(face1) && !face.Equals(face2)) return false;
+
+            //se comprueba si el valor de la ficha es igual a la cara por donde se quiere jugar
             int val = token.Face1.GetValue() + token.Face2.GetValue();
-            return (val == face1.GetValue() || val == face2.GetValue());
+            return (val == face.GetValue());
         }
 
         public IFace FaceLeft()

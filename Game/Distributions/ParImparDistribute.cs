@@ -4,7 +4,7 @@ namespace Game
     public class ParImparDistribute:IDistribute
     {
         public string Description() => "Todas las fichas que se le reparten a un jugador tienen valor par o impar ";
-        int n_players;
+        int n_players; //cantidad de fichas por juadores
         public ParImparDistribute(int n)
         {
             n_players = n;
@@ -14,6 +14,7 @@ namespace Game
             List<Token> par = new List<Token>();
             List<Token> impar = new List<Token>();
             List < IPlayer> players = p.ToList();
+            //separar las fichas por par e impar segun su valor
             foreach (var t in tokens)
             {
                 int val = t.Face1.GetValue() + t.Face2.GetValue();
@@ -26,14 +27,14 @@ namespace Game
             
          
             int i = 0;
-            bool par_turn = true;
+            bool par_turn = true; // para alternar entre el tipo de ficha q se le reparte al jugador
             while (i < players.Count)
             {
                 Random rand = new Random();
                 for (int j = 0; j < n_players; j++)
                 {
                     int index; 
-                    if (par_turn)
+                    if (par_turn) // si es par se toma una ficha aleatoria de la lista de par y se le agrega a un jugador
                     {
                         index = rand.Next(0,par.Count);
                         players[i].addToken(par[index]);
@@ -42,6 +43,7 @@ namespace Game
                     }
                     else
                     {
+                        //se le agrega la ficha impar 
                         index = rand.Next(0,impar.Count);
                         players[i].addToken(impar[index]);
                         tokens.Remove(impar[index]);
@@ -49,8 +51,8 @@ namespace Game
 
                     }
                 }
-                i++;
-                par_turn = !par_turn;
+                i++; // mover al siguiente jugador
+                par_turn = !par_turn; //alternar entre el tipo de par o impar
 
             }
         }

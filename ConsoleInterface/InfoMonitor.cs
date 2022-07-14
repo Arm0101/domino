@@ -3,18 +3,21 @@ namespace ConsoleInterface
 {
     internal class InfoMonitor : IMonitor
     {
-        private IDisposable cancellation;   
+        //se guarda una instancia de Unsubscriber
+        private IDisposable cancellation;
         public void OnCompleted()
         {
             throw new NotImplementedException();
         }
         public virtual void Unsubscribe()
         {
+            //dejar de recibir informacion
             cancellation.Dispose();
 
         }
         public void Subscribe(InfoHandler provider)
         {
+            //empezar a recibir informacion sobre el estado del juego
             cancellation = provider.Subscribe(this);
         }
 
@@ -23,9 +26,10 @@ namespace ConsoleInterface
             
         }
 
+        //representar estado del juego
         public virtual void OnNext(Info value)
         {
-            if (value.Change)
+            if (value.Change) // se comprueba si el estado del juego cambio
             {
                 Console.Clear();
                 Print.printTable(value.Table);
@@ -46,7 +50,7 @@ namespace ConsoleInterface
                 Print.printPlayersTokens(value.PlayersInfo);
                 Console.WriteLine();
                 
-                if (value.Finalized)
+                if (value.Finalized) // si el juego finalizo se muestran los ganadores
                 {
                     foreach (var p in value.Winners)
                     {
@@ -57,7 +61,7 @@ namespace ConsoleInterface
 
               
             }
-
+            //se muestran las notificacion
             Console.WriteLine(value.Notification);
             Console.ReadKey();
         }

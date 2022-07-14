@@ -2,8 +2,10 @@
 using Game;
 namespace ConsoleInterface
 {
+    
     public class GameSettings
     {
+        //Lista de implementaciones concretas para las abstracciones
         private static Type[] typesofPlayers = new Type[] { typeof(NormalPlayer), typeof(AlmostSmartPlayer), typeof(PlayMostValuable) };
         private static Type[] typesofOrders = new Type[] { typeof(NormalOrder), typeof(ReverseOrder) };
         private static Type[] typesofWin = new Type[] { typeof(NormalWin), typeof(WinByPasses) };
@@ -12,6 +14,8 @@ namespace ConsoleInterface
         private static Type[] typesofActions = new Type[] { typeof(NormalAction), typeof(RemovePlayer), typeof(AddTokenToPlayer) };
         private static Type[] typesofTables = new Type[] { typeof(NormalTable), typeof(AdditionTable) };
         private static Type[] typesofGenerators = new Type[] { typeof(NumericTokensGenerator), typeof(MixTokensGenerator) };
+       
+        //se pregunta al usuario y se establecen las implementaciones  que se usaran en una partida
         public static void SetOptions(out ITable table, out ICollection<IPlayer> players, out IDistribute distribute, out IOrder order, out List<Token> tokens, out IFinish finish, out IWin win,out  IEnumerable<IAction> actions)
         {
             //conjunto de fichas s
@@ -30,7 +34,7 @@ namespace ConsoleInterface
 
             //Forma en que se distribuyen las fichas
             Console.Clear();
-            Console.WriteLine("Como se distribuiran las fichas");
+            Console.WriteLine("Como se distribuiran las fichas?");
             distribute = setDistribute();
 
             //mesa 
@@ -191,6 +195,8 @@ namespace ConsoleInterface
             }
             return actions;
         }
+        
+        //crear instancia de Manager
         public static Manager BuildGame(ITable table, ICollection<IPlayer> players, IDistribute distribute, IOrder order, List<Token> tokens, IFinish finish, IWin win, IEnumerable<IAction> actions, IMonitor monitor)
         {
            return new Manager(table, players, distribute, tokens, order, finish, win, actions, monitor);

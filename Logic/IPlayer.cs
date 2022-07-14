@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
+    //define como el jugador escoge la ficha que va a jugar
     public interface IPlayer
     {
         public string Description();

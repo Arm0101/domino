@@ -4,11 +4,14 @@ namespace ConsoleInterface
 {
     public static class Print
     {
+
+        //se imprime una ficha de la forma [1:2]
         public static void printToken(Token t)
         {
            Console.Write("[{0}:{1}]", t.Face1.getRepresentation(), t.Face2.getRepresentation());
                       
         }
+        //se imprimen las fichas jugadas y las caras por donde se puede jugar
         public static void printTable(ITable table)
         {
             List<Token> tokens = table.getHistory().ToList();
@@ -29,6 +32,7 @@ namespace ConsoleInterface
             Console.WriteLine("->[{0}:{1}]", left, right);
 
         }
+        //se muestran las fichas de los jugadores
         public static void printPlayersTokens(List<IPlayer> players) {
             int n = 0;
             

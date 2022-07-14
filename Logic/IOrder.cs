@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
+    //define quien es el jugador siguiente
     public interface IOrder
     {
         public string Description();

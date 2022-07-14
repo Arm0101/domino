@@ -37,18 +37,11 @@ namespace Game
         {
             List <IFace> curr_faces = new List<IFace>() { table.FaceRight(), table.FaceLeft()} ;
 
+            //se juega la primera ficha valida
             foreach (Token token in tokens) {
-                if (table.Validate(this,token,history)) {
+                if (table.Validate(this, token, curr_faces[0], history)) return (token, curr_faces[0]);
+                if (table.Validate(this, token, curr_faces[1], history)) return (token, curr_faces[1]);
 
-                    IFace face = null;
-
-                    if (curr_faces.Contains(token.Face1)) face = token.Face1;
-                    if (curr_faces.Contains(token.Face2)) face = token.Face2;
-                    
-                   
-                    return (token, face);
-                }
-                
             }
 
             return (null, null);

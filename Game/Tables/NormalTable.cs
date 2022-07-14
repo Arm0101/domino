@@ -19,6 +19,7 @@ namespace Game
         }
         public void addToken(Token token, IFace value)
         {
+            //si no hay fichas en la mesa se agrega la ficha
             if (face1 == null && face2 == null)
             {
                 face1 = token.Face1;
@@ -26,8 +27,10 @@ namespace Game
                 hist.Add(token);
                 return;
             }
+            //si la ficha tiene las 2 caras iguales
             if (token.Face1.Equals(token.Face2))
             {
+                //se comprueba que cara de la ficha es la q se quiere jugar
                 if (value.Equals(face2))
                 {
                     hist.Add(token);
@@ -39,15 +42,21 @@ namespace Game
                     return;
                 }
             }
+            //si la cara que se quiere jugar es la primera
             if (value.Equals(token.Face1))
             {
+                //si es igual a la cara izquierda de la mesa
                 if (face1.Equals(value))
                 {
+                    //se actualiza la cara disponible para jugar
                     face1 = token.Face2;
+                    //se invierte la ficha para que coincidan las caras
                     Token aux = new Token(token.Face2, token.Face1);
+                    //se agrega al principio
                     hist.Insert(0, aux);
                     return ;
                 }
+                //si es la cara izquierda de la mesa entonces se agrega al principio
                 if (face2.Equals(value))
                 {
             
@@ -56,6 +65,8 @@ namespace Game
                     return;
                 }
             }
+
+            //analogo al primer caso
             if (value.Equals(token.Face2))
             {
                 if (face1.Equals(value))
@@ -75,14 +86,20 @@ namespace Game
 
         }
 
-        public bool Validate(IPlayer player, Token ? token, History history) {
+        public bool Validate(IPlayer player, Token ? token, IFace face, History history) {
 
             if (token is null) return false;
-            List<IFace> lastFaces = new List<IFace> { face1, face2 };
-            if (lastFaces[0] == null || lastFaces[1] == null) return true;
+           
+            //si no hay fichas en la mesa se permitira jugar cualquier ficha
+            if (face1 == null || face2 == null) return true;
 
-            if (lastFaces.Contains(token.Face1) || lastFaces.Contains(token.Face2)) return true;
+            //se comprueba que la cara por donde se quiere validar este en la mesa
+            if (!face.Equals(face1) && !face.Equals(face2)) return false;
 
+
+            //se comprueba si una de las caras del token es igual la cara por donde se quiere jugar
+            if (token.Face1.Equals(face) || token.Face2.Equals(face)) return true;
+            
             return false;
         }
 

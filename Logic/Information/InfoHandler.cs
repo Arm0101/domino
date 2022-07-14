@@ -1,10 +1,12 @@
 ﻿
 namespace Logic
 {
+
+    //Patron Observer
     public class InfoHandler : IObservable<Info>
     {
-        private List<IObserver<Info>> observers;
-        private Info game_info;
+        private List<IObserver<Info>> observers; //lista de observers que recibiran notificaciones
+        private Info game_info; //estado actual del juego
        
         public InfoHandler() { 
             observers = new List<IObserver<Info>>();
@@ -12,14 +14,16 @@ namespace Logic
         }
         public IDisposable Subscribe(IObserver<Info> observer)
         {
+            //agregar nuevo observer
             if (!observers.Contains(observer))
             {
                 observers.Add(observer);
             }  
-
+            //permitira al observer dejar de recibir notificaciones
             return new Unsubscriber<Info>(observers,observer);
         }
 
+        //informar a los observers de los cambios
         public void Update(ITable table, History history, List<IPlayer> players , List<IPlayer> winners, bool finalized) { 
            
             game_info.UpdateInfo(table, history, players, winners, finalized);
@@ -27,7 +31,7 @@ namespace Logic
                 observer.OnNext(game_info);
 
         }
-
+        //enviar una notificacion a los observers
         public void Notify(string notifi) {
             if (String.IsNullOrEmpty(notifi)) return;
             game_info.addNotification(notifi);
@@ -45,6 +49,7 @@ namespace Logic
             observer = _observer;
             observers = _observers;
         }
+        //observer dejara de recibir informacion
         public void Dispose()
         {
             if (observers.Contains(observer))

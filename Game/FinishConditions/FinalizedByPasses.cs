@@ -8,16 +8,20 @@ namespace Game
         public bool Finish(ITable table, IEnumerable<IPlayer> p, History history)
         {
             IPlayer[] players = p.ToArray();
-            
-            foreach (var player in players)
+            //recorrer jugadores
+            foreach (var player in players) 
             {
                 int count = 0;
                 string id = player.getID();
                 for (int i = 0; i < history.IdHistory.Count; i++)
                 {
+                    //si no es el jugador actual continua
                     if (!history.IdHistory[i].Equals(id)) continue;
+
+                    //contar cantidad de veces que se paso el jugador
                     if (history.TokensHistory[i] == null) count++;
-                    if (count == 2) return true;
+                    // si se encuentra un jugador que se paso 2 veces se finaliza el juego
+                    if (count == 2) return true; 
                 }
             }
             return false; 

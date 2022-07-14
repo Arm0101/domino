@@ -12,27 +12,22 @@ namespace Game
         public override (Token, IFace) selectToken(ITable table, History history)
         {
 
+            //ficha y cara que se va a devolver
             Token token = null;
             IFace face = null;
-
+            //caras por donde se puede jugar
             List<IFace> curr_faces = new List<IFace>() { table.FaceRight(), table.FaceLeft() };
             int count = int.MinValue;
 
+            //no se ha jugado todavia
             if (curr_faces[0] == null && curr_faces[1] == null)
             {
                 foreach (Token t in tokens)
                 {
-                    if (table.Validate(this, t, history))
-                    {
 
-                        IFace f = null;
-
-                        if (curr_faces.Contains(t.Face1)) f = t.Face1;
-                        if (curr_faces.Contains(t.Face2)) f = t.Face2;
-
-
-                        return (t, f);
-                    }
+                    //Se busca la primera ficha valida
+                    if (table.Validate(this, t, curr_faces[0], history)) return (t, curr_faces[0]);
+                    if (table.Validate(this, t, curr_faces[0], history)) return (t, curr_faces[1]);
 
                 }
             }
@@ -42,30 +37,33 @@ namespace Game
             foreach (var t in tokens)
             {
                 
-                int currentCount = 0;
-                if (!table.Validate(this, t, history)) continue;
-                if (curr_faces.Contains(t.Face1)) {
-
+                int currentCount = 0;//cantidad de fichas validas despues que se pone una ficha
+                
+                //si es valido jugar por esta cara
+                if (table.Validate(this, t, curr_faces[0], history)) { 
+          
+                    //se crea una mesa auxiliar y se agrega la ficha
                     ITable aux_table = table.GetInstance();
-                    aux_table.addToken(t, t.Face1);
-                    currentCount = CountValidTokens(aux_table,history,t);
-
+                    aux_table.addToken(t, curr_faces[0]);
+                    currentCount = CountValidTokens(aux_table, curr_faces[0], history,t);
+                    //si la ficha deja al jugador con mas fichas validas se actualiza la mejor ficha
                     if (currentCount >= count)
                     {
                         count = currentCount;
-                        face = t.Face1;
+                        face = curr_faces[0];
                         token = t;
                     }
                     
                 }
-                if (curr_faces.Contains(t.Face2)) {
+                if (table.Validate(this, t, curr_faces[1], history))
+                {
                     ITable aux_table = table.GetInstance();
-                    aux_table.addToken(t, t.Face1);
-                    currentCount = CountValidTokens(aux_table, history, t);
+                    aux_table.addToken(t, curr_faces[1]);
+                    currentCount = CountValidTokens(aux_table, curr_faces[1], history, t);
                     if (currentCount >= count)
                     {
                         count = currentCount;
-                        face = t.Face2;
+                        face = curr_faces[1];
                         token = t;
                     }
                 }
@@ -75,12 +73,13 @@ namespace Game
             return (token, face);
         }
 
-        private int CountValidTokens(ITable table ,History history, Token token)
+        //contar la cantidad de fichas validas para una mesa
+        private int CountValidTokens(ITable table , IFace face,History history, Token token)
         {
             int count = 0;
             foreach (var t in tokens)
             {
-                if (table.Validate(this, t, history)) count++;
+                if (table.Validate(this, t, face, history)) count++;
             }
             return count;
         }

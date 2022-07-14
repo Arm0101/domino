@@ -1,5 +1,6 @@
 ﻿namespace Logic
 {
+    //Representa una ficha con 2 caras de tipo IFace
     public class Token
     {
         private IFace face1, face2;
