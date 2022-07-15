@@ -7,9 +7,8 @@ namespace Game
         public string Description() => "El juego finaliza si un juagdor llega a los 2 pases";
         public bool Finish(ITable table, IEnumerable<IPlayer> p, History history)
         {
-            IPlayer[] players = p.ToArray();
             //recorrer jugadores
-            foreach (var player in players) 
+            foreach (var player in p)
             {
                 int count = 0;
                 string id = player.getID();
@@ -21,10 +20,10 @@ namespace Game
                     //contar cantidad de veces que se paso el jugador
                     if (history.TokensHistory[i] == null) count++;
                     // si se encuentra un jugador que se paso 2 veces se finaliza el juego
-                    if (count == 2) return true; 
+                    if (count == 2) return true;
                 }
             }
-            return false; 
+            return false;
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using Logic;
 namespace Game
-{ 
+{
     public class NormalFace : IFace
     {
         private int value;
-        public NormalFace(int val) {
+        public NormalFace(int val)
+        {
             value = val;
         }
-        
+
         public int GetValue()
         {
             return value;
@@ -17,14 +18,16 @@ namespace Game
         {
             return value.Equals(other.GetValue());
         }
-        public string getRepresentation() {
+        public string getRepresentation()
+        {
             return value.ToString();
         }
-        public IFace GetInstance() { 
+        public IFace GetInstance()
+        {
             return new NormalFace(value);
         }
 
     }
 
-    
+
 }

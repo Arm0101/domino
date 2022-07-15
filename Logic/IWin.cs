@@ -1,6 +1,4 @@
-﻿
-
-namespace Logic
+﻿namespace Logic
 {
     //define que jugadores son los ganadores
     public interface IWin

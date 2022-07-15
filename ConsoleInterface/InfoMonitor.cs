@@ -23,7 +23,7 @@ namespace ConsoleInterface
 
         public void OnError(Exception error)
         {
-            
+
         }
 
         //representar estado del juego
@@ -49,7 +49,7 @@ namespace ConsoleInterface
                 Console.WriteLine();
                 Print.printPlayersTokens(value.PlayersInfo);
                 Console.WriteLine();
-                
+
                 if (value.Finalized) // si el juego finalizo se muestran los ganadores
                 {
                     foreach (var p in value.Winners)
@@ -59,7 +59,7 @@ namespace ConsoleInterface
 
                 }
 
-              
+
             }
             //se muestran las notificacion
             Console.WriteLine(value.Notification);

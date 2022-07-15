@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class ReverseOrder:IOrder
+    public class ReverseOrder : IOrder
     {
 
         public string Description() => "Se cambia el orden cada vez que un jugador se pasa";
@@ -28,7 +28,7 @@ namespace Game
             if (index >= 0)
             {
                 currentId = history.IdHistory[index];
-                currentPast =  history.TokensHistory[index] == null;
+                currentPast = history.TokensHistory[index] == null;
                 if (currentPast) increment = !increment; //si el ultimo jugador se paso se cambia el orden
 
             }
@@ -41,24 +41,25 @@ namespace Game
                 if (increment)
                 {
                     actual_turn++; //indice para el jugador siguiente
-                    if (actual_turn  >= players.Length)
+                    if (actual_turn >= players.Length)
                         actual_turn = 0;
                 }
                 else
                 {
                     actual_turn--;//indice para el jugador anterior
                     if (actual_turn < 0)
-                        actual_turn = players.Length - 1; 
+                        actual_turn = players.Length - 1;
 
                 }
                 //se repite el proceso si el jugador siguiente o anterior esta pasado y el jugador actual esta pasado
                 //si se llega el jugador actual se rompe el ciclo
-            } while (isPast(history,players[actual_turn])  && currentPast && players[actual_turn].getID() != currentId);
+            } while (isPast(history, players[actual_turn]) && currentPast && players[actual_turn].getID() != currentId);
 
             return players[actual_turn];
         }
 
-        public bool isPast(History history , IPlayer player) {
+        public bool isPast(History history, IPlayer player)
+        {
             int n = history.IdHistory.Count;
             for (int i = n - 1; i >= 0; i--)
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using Logic;
+﻿using Logic;
 namespace ConsoleInterface
 {
     public static class Print
@@ -8,14 +7,14 @@ namespace ConsoleInterface
         //se imprime una ficha de la forma [1:2]
         public static void printToken(Token t)
         {
-           Console.Write("[{0}:{1}]", t.Face1.getRepresentation(), t.Face2.getRepresentation());
-                      
+            Console.Write("[{0}:{1}]", t.Face1.getRepresentation(), t.Face2.getRepresentation());
+
         }
         //se imprimen las fichas jugadas y las caras por donde se puede jugar
         public static void printTable(ITable table)
         {
             List<Token> tokens = table.getHistory().ToList();
-            
+
             tokens.ForEach(t => printToken(t));
             Console.WriteLine();
             string left = "";
@@ -33,29 +32,32 @@ namespace ConsoleInterface
 
         }
         //se muestran las fichas de los jugadores
-        public static void printPlayersTokens(List<IPlayer> players) {
+        public static void printPlayersTokens(IEnumerable<IPlayer> players)
+        {
             int n = 0;
-            
-            players.ForEach(x => { if (x.getTokens().ToList().Count > n) n = x.getTokens().ToList().Count; });
+
+            players.ToList().ForEach(x => { if (x.getTokens().ToList().Count > n) n = x.getTokens().ToList().Count; });
             Console.WriteLine();
             for (int i = 0; i < n; i++)
             {
-                
-                for (int j = 0; j < players.Count; j++) {
-                    Token [] tokens = players[j].getTokens().ToArray();
+
+                foreach (var player in players)
+                {
+                    Token[] tokens = player.getTokens().ToArray();
                     if (tokens.Length - 1 >= i)
                     {
                         printToken(tokens[i]);
                     }
-                    else {
+                    else
+                    {
                         Console.Write("[-:-]");
                     }
                     Console.Write("      ");
-                   
+
                 }
                 Console.WriteLine();
             }
-      
+
         }
     }
 }

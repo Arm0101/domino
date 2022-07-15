@@ -18,7 +18,8 @@ namespace Game
                 if (currentCount == min_passes) winners.Add(player);
 
                 //tiene menor cantidad de pases entonces pasa a ser el ganador
-                if (currentCount < min_passes) {
+                if (currentCount < min_passes)
+                {
                     winners.Clear();
                     winners.Add(player);
                     min_passes = currentCount;
@@ -26,14 +27,15 @@ namespace Game
             }
             return winners;
         }
-        private int CountPasses(IPlayer player, History history) {
+        private int CountPasses(IPlayer player, History history)
+        {
             int count = 0;
             //Se busca en el historial de jugadas y contamos la cantidad de fichas null que correspondan al jugador
             for (int i = 0; i < history.IdHistory.Count; i++)
             {
                 if (!history.IdHistory[i].Equals(player.getID())) continue;
                 if (history.TokensHistory[i] == null) count++;
-                
+
             }
             return count;
         }

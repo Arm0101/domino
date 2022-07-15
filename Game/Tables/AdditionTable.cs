@@ -29,29 +29,29 @@ namespace Game
                 hist.Add(token);
                 return;
             }
-                //si la cara 1 es igual a la cara por donde se va a jugar
-                if (face1.Equals(face))
-                {
-                    //se actualiza el valor de la cara por donde se puede jugar
-                    face1 = token.Face1;
-                    //se agrega al principio de la lista
-                    hist.Insert(0, token);
-                    return;
-                }
-                if (face2.Equals(face))
-                {
+            //si la cara 1 es igual a la cara por donde se va a jugar
+            if (face1.Equals(face))
+            {
+                //se actualiza el valor de la cara por donde se puede jugar
+                face1 = token.Face1;
+                //se agrega al principio de la lista
+                hist.Insert(0, token);
+                return;
+            }
+            if (face2.Equals(face))
+            {
 
-                    face2 = token.Face2;
-                    hist.Add(token);
-                    return;
-                }
+                face2 = token.Face2;
+                hist.Add(token);
+                return;
+            }
         }
-              
+
 
 
         public bool Validate(IPlayer player, Token? token, IFace face, History history)
         {
-            
+
             if (token is null) return false;
             //si no hay fichas en la mesa cualquier ficha sera valida
             if (face1 is null || face2 is null) return true;
@@ -80,7 +80,7 @@ namespace Game
         }
         public ITable GetInstance()
         {
-            
+
             return new AdditionTable(face1, face2, hist);
         }
     }

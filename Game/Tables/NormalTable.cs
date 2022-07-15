@@ -4,17 +4,19 @@ namespace Game
 {
     public class NormalTable : ITable
     {
-        private IFace ? face1;
-        private IFace ? face2;
+        private IFace? face1;
+        private IFace? face2;
         private List<Token> hist;
 
         public string Description() => "Las fichas se validan y se agregan a la mesa de la forma clasica";
-        private NormalTable(IFace f1, IFace f2, List<Token> h) { 
+        private NormalTable(IFace f1, IFace f2, List<Token> h)
+        {
             face1 = f1.GetInstance();
             face2 = f2.GetInstance();
             hist = new List<Token>(h);
         }
-        public NormalTable() {
+        public NormalTable()
+        {
             hist = new List<Token>();
         }
         public void addToken(Token token, IFace value)
@@ -54,12 +56,12 @@ namespace Game
                     Token aux = new Token(token.Face2, token.Face1);
                     //se agrega al principio
                     hist.Insert(0, aux);
-                    return ;
+                    return;
                 }
                 //si es la cara izquierda de la mesa entonces se agrega al principio
                 if (face2.Equals(value))
                 {
-            
+
                     face2 = token.Face2;
                     hist.Add(token);
                     return;
@@ -86,10 +88,11 @@ namespace Game
 
         }
 
-        public bool Validate(IPlayer player, Token ? token, IFace face, History history) {
+        public bool Validate(IPlayer player, Token? token, IFace face, History history)
+        {
 
             if (token is null) return false;
-           
+
             //si no hay fichas en la mesa se permitira jugar cualquier ficha
             if (face1 == null || face2 == null) return true;
 
@@ -99,7 +102,7 @@ namespace Game
 
             //se comprueba si una de las caras del token es igual la cara por donde se quiere jugar
             if (token.Face1.Equals(face) || token.Face2.Equals(face)) return true;
-            
+
             return false;
         }
 
@@ -117,8 +120,9 @@ namespace Game
         {
             return hist;
         }
-        public ITable GetInstance() { 
-            return new NormalTable(face1,face2,hist);
+        public ITable GetInstance()
+        {
+            return new NormalTable(face1, face2, hist);
         }
     }
 }

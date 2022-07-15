@@ -20,7 +20,7 @@ namespace Game
             for (char i = 'a'; i <= 'z'; i++)
             {
                 if (val == i) { value = count; break; }
-                    
+
                 count++;
             }
         }
@@ -38,8 +38,9 @@ namespace Game
         {
             return repr.ToString();
         }
-        public IFace GetInstance() {
-           return new CharFace(value,repr);
+        public IFace GetInstance()
+        {
+            return new CharFace(value, repr);
         }
 
     }

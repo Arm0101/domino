@@ -7,8 +7,9 @@ namespace Logic
     {
         private List<IObserver<Info>> observers; //lista de observers que recibiran notificaciones
         private Info game_info; //estado actual del juego
-       
-        public InfoHandler() { 
+
+        public InfoHandler()
+        {
             observers = new List<IObserver<Info>>();
             game_info = new Info();
         }
@@ -18,21 +19,23 @@ namespace Logic
             if (!observers.Contains(observer))
             {
                 observers.Add(observer);
-            }  
+            }
             //permitira al observer dejar de recibir notificaciones
-            return new Unsubscriber<Info>(observers,observer);
+            return new Unsubscriber<Info>(observers, observer);
         }
 
         //informar a los observers de los cambios
-        public void Update(ITable table, History history, List<IPlayer> players , List<IPlayer> winners, bool finalized) { 
-           
+        public void Update(ITable table, History history, IEnumerable<IPlayer> players, IEnumerable<IPlayer> winners, bool finalized)
+        {
+
             game_info.UpdateInfo(table, history, players, winners, finalized);
-            foreach(var observer in observers)
+            foreach (var observer in observers)
                 observer.OnNext(game_info);
 
         }
         //enviar una notificacion a los observers
-        public void Notify(string notifi) {
+        public void Notify(string notifi)
+        {
             if (String.IsNullOrEmpty(notifi)) return;
             game_info.addNotification(notifi);
             foreach (var observer in observers)
@@ -45,7 +48,8 @@ namespace Logic
         private List<IObserver<info>> observers;
         private IObserver<info> observer;
 
-        internal Unsubscriber(List<IObserver<info>> _observers, IObserver<info> _observer) { 
+        internal Unsubscriber(List<IObserver<info>> _observers, IObserver<info> _observer)
+        {
             observer = _observer;
             observers = _observers;
         }

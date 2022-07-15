@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Logic
+﻿namespace Logic
 {
     //Patron Observer
     //Define como se recibe la informacion del estado del juego
@@ -13,6 +7,6 @@ namespace Logic
         public void Unsubscribe();
 
         public void Subscribe(InfoHandler provider);
-      
+
     }
 }

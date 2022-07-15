@@ -1,7 +1,7 @@
 ﻿using Logic;
 
 namespace Game
-    {
+{
     public class PlayMostValuable : NormalPlayer
     {
 
@@ -9,7 +9,8 @@ namespace Game
         public PlayMostValuable(string _id) : base(_id)
         {
         }
-        public override (Token, IFace) selectToken(ITable table, History history) {
+        public override (Token, IFace) selectToken(ITable table, History history)
+        {
 
             Token token = null;
             IFace face = null;
@@ -46,7 +47,8 @@ namespace Game
             return (token, face);
         }
         //obtener el valor de una ficha
-        private int value(Token token) {
+        private int value(Token token)
+        {
             if (token == null) return -1;
             return (token.Face1.GetValue() + token.Face2.GetValue());
         }

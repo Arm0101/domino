@@ -26,7 +26,7 @@ namespace Game
                 //si es igual al mejor actual se agrega como ganador
                 if (aux == points)
                 {
-                    
+
                     winner.Add(item);
                 }
                 //si el jugador tiene menos puntos que los ganadores actuales pasa a ser el ganador

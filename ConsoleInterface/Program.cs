@@ -1,13 +1,13 @@
 ﻿using Logic;
-using Game;
 namespace ConsoleInterface
 {
 
 
     public class Program
-    {   
-        static void Main(string[] args) {
-            
+    {
+        static void Main(string[] args)
+        {
+
             ICollection<IPlayer> players = null;
             ITable table = null;
             IDistribute distribute = null;
@@ -19,17 +19,17 @@ namespace ConsoleInterface
             IMonitor monitor = new InfoMonitor();
 
             //se establecen las implementaciones concretas que se utilizaran en una partida
-            GameSettings.SetOptions(out table, out players,out distribute, out order, out tokens, out finish,out win, out actions);
+            GameSettings.SetOptions(out table, out players, out distribute, out order, out tokens, out finish, out win, out actions);
             //se utilizan dichas implementaciones para crear una instancia de la clase manager
             Manager manager = GameSettings.BuildGame(table, players, distribute, order, tokens, finish, win, actions, monitor);
-           //se inicia la partida
+            //se inicia la partida
             manager.play();
 
 
 
         }
-        
+
     }
-  
-    
+
+
 }

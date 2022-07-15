@@ -36,12 +36,13 @@ namespace Game
 
             foreach (var t in tokens)
             {
-                
+
                 int currentCount = 0;//cantidad de fichas validas despues que se pone una ficha
-                
+
                 //si es valido jugar por esta cara
-                if (table.Validate(this, t, curr_faces[0], history)) { 
-          
+                if (table.Validate(this, t, curr_faces[0], history))
+                {
+
                     //se crea una mesa auxiliar y se agrega la ficha
                     ITable aux_table = table.GetInstance();
                     aux_table.addToken(t, curr_faces[0]);
@@ -53,7 +54,7 @@ namespace Game
                         face = curr_faces[0];
                         token = t;
                     }
-                    
+
                 }
                 if (table.Validate(this, t, curr_faces[1], history))
                 {
@@ -67,8 +68,8 @@ namespace Game
                         token = t;
                     }
                 }
-                
-                
+
+
             }
             return (token, face);
         }
@@ -84,6 +85,6 @@ namespace Game
             }
             return count;
         }
-      
+
     }
 }

@@ -8,8 +8,9 @@ namespace Game
         public virtual string Description() => "Juega la primera ficha valida";
         protected string id;
         protected List<Token> tokens;
-        public NormalPlayer(string _id) {
-            
+        public NormalPlayer(string _id)
+        {
+
             tokens = new List<Token>();
             id = _id;
         }
@@ -25,7 +26,7 @@ namespace Game
 
         public string getID()
         {
-           return id;
+            return id;
         }
 
         public IEnumerable<Token> getTokens()
@@ -33,12 +34,13 @@ namespace Game
             return tokens;
         }
 
-        public virtual (Token, IFace ) selectToken(ITable table, History history)
+        public virtual (Token, IFace) selectToken(ITable table, History history)
         {
-            List <IFace> curr_faces = new List<IFace>() { table.FaceRight(), table.FaceLeft()} ;
+            List<IFace> curr_faces = new List<IFace>() { table.FaceRight(), table.FaceLeft() };
 
             //se juega la primera ficha valida
-            foreach (Token token in tokens) {
+            foreach (Token token in tokens)
+            {
                 if (table.Validate(this, token, curr_faces[0], history)) return (token, curr_faces[0]);
                 if (table.Validate(this, token, curr_faces[1], history)) return (token, curr_faces[1]);
 

@@ -1,6 +1,4 @@
-﻿
-
-namespace Logic
+﻿namespace Logic
 {
     //define la forma en la que se repartiran las fichas
     public interface IDistribute

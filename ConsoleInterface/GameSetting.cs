@@ -1,22 +1,22 @@
-﻿using Logic;
-using Game;
+﻿using Game;
+using Logic;
 namespace ConsoleInterface
 {
-    
+
     public class GameSettings
     {
         //Lista de implementaciones concretas para las abstracciones
-        private static Type[] typesofPlayers = new Type[] { typeof(NormalPlayer), typeof(AlmostSmartPlayer), typeof(PlayMostValuable) };
-        private static Type[] typesofOrders = new Type[] { typeof(NormalOrder), typeof(ReverseOrder) };
-        private static Type[] typesofWin = new Type[] { typeof(NormalWin), typeof(WinByPasses) };
-        private static Type[] typesofFinish = new Type[] { typeof(NormalFinish), typeof(FinalizedByPasses), typeof(FinilizedByNPlayers) };
-        private static Type[] typesofDsitibute = new Type[] { typeof(RandomDistibute), typeof(ParImparDistribute) };
-        private static Type[] typesofActions = new Type[] { typeof(NormalAction), typeof(RemovePlayer), typeof(AddTokenToPlayer) };
-        private static Type[] typesofTables = new Type[] { typeof(NormalTable), typeof(AdditionTable) };
-        private static Type[] typesofGenerators = new Type[] { typeof(NumericTokensGenerator), typeof(MixTokensGenerator) };
-       
+        private static Type[] typesofPlayers = { typeof(NormalPlayer), typeof(AlmostSmartPlayer), typeof(PlayMostValuable) };
+        private static Type[] typesofOrders = { typeof(NormalOrder), typeof(ReverseOrder) };
+        private static Type[] typesofWin = { typeof(NormalWin), typeof(WinByPasses) };
+        private static Type[] typesofFinish = { typeof(NormalFinish), typeof(FinalizedByPasses), typeof(FinilizedByNPlayers) };
+        private static Type[] typesofDsitibute = { typeof(RandomDistibute), typeof(ParImparDistribute) };
+        private static Type[] typesofActions = { typeof(NormalAction), typeof(RemovePlayer), typeof(AddTokenToPlayer) };
+        private static Type[] typesofTables = { typeof(NormalTable), typeof(AdditionTable) };
+        private static Type[] typesofGenerators = { typeof(NumericTokensGenerator), typeof(MixTokensGenerator) };
+
         //se pregunta al usuario y se establecen las implementaciones  que se usaran en una partida
-        public static void SetOptions(out ITable table, out ICollection<IPlayer> players, out IDistribute distribute, out IOrder order, out List<Token> tokens, out IFinish finish, out IWin win,out  IEnumerable<IAction> actions)
+        public static void SetOptions(out ITable table, out ICollection<IPlayer> players, out IDistribute distribute, out IOrder order, out List<Token> tokens, out IFinish finish, out IWin win, out IEnumerable<IAction> actions)
         {
             //conjunto de fichas s
             Console.Clear();
@@ -61,10 +61,11 @@ namespace ConsoleInterface
             Console.Clear();
             Console.WriteLine("Quien gana?");
             win = setWin();
-           
+
         }
-        private static IGenerator setGenerator() {
-          
+        private static IGenerator setGenerator()
+        {
+
             List<IGenerator> aux = new List<IGenerator>();
             for (int i = 0; i < typesofGenerators.Length; i++)
             {
@@ -107,7 +108,8 @@ namespace ConsoleInterface
             return playerList;
         }
 
-        private static ITable setTable() {
+        private static ITable setTable()
+        {
 
             List<ITable> aux = new List<ITable>();
             for (int i = 0; i < typesofTables.Length; i++)
@@ -121,7 +123,8 @@ namespace ConsoleInterface
             return table;
         }
 
-        private static IDistribute setDistribute() {
+        private static IDistribute setDistribute()
+        {
             Console.Write("Cantidad de fichas por jugador: ");
             int n = int.Parse(Console.ReadLine());
             List<IDistribute> aux = new List<IDistribute>();
@@ -136,11 +139,12 @@ namespace ConsoleInterface
             return distribute;
         }
 
-        private static IOrder setOrder(IEnumerable<IPlayer> player) { 
+        private static IOrder setOrder(IEnumerable<IPlayer> player)
+        {
             List<IOrder> aux = new List<IOrder>();
             for (int i = 0; i < typesofOrders.Length; i++)
             {
-                IOrder o = (IOrder)Activator.CreateInstance(typesofOrders[i],player);
+                IOrder o = (IOrder)Activator.CreateInstance(typesofOrders[i], player);
                 Console.WriteLine("{0} : {1}", i, o.Description());
                 aux.Add(o);
             }
@@ -148,8 +152,9 @@ namespace ConsoleInterface
             IOrder order = aux[index];
             return order;
         }
-        
-        private static IFinish setFinish() {
+
+        private static IFinish setFinish()
+        {
             List<IFinish> aux = new List<IFinish>();
             for (int i = 0; i < typesofFinish.Length; i++)
             {
@@ -162,7 +167,8 @@ namespace ConsoleInterface
             return finish;
         }
 
-        private static IWin setWin() {
+        private static IWin setWin()
+        {
             List<IWin> aux = new List<IWin>();
             for (int i = 0; i < typesofWin.Length; i++)
             {
@@ -174,7 +180,7 @@ namespace ConsoleInterface
             IWin win = aux[index];
             return win;
         }
-        
+
         private static IEnumerable<IAction> setActions()
         {
             List<IAction> aux = new List<IAction>();
@@ -195,11 +201,11 @@ namespace ConsoleInterface
             }
             return actions;
         }
-        
+
         //crear instancia de Manager
         public static Manager BuildGame(ITable table, ICollection<IPlayer> players, IDistribute distribute, IOrder order, List<Token> tokens, IFinish finish, IWin win, IEnumerable<IAction> actions, IMonitor monitor)
         {
-           return new Manager(table, players, distribute, tokens, order, finish, win, actions, monitor);
+            return new Manager(table, players, distribute, tokens, order, finish, win, actions, monitor);
         }
 
     }
