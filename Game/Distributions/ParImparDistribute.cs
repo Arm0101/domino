@@ -34,6 +34,7 @@ namespace Game
                 for (int j = 0; j < n_players; j++)
                 {
                     int index;
+                    if (tokens.Count == 0) return;
                     if (par_turn) // si es par se toma una ficha aleatoria de la lista de par y se le agrega a un jugador
                     {
                         index = rand.Next(0, par.Count);

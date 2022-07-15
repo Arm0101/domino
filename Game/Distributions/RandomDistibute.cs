@@ -20,6 +20,7 @@ namespace Game
                 {
                     //se obtiene una ficha aleatoria y se le agrega al jugador i
                     int index = random.Next(0, tokens.Count);
+                    if (tokens.Count == 0) return;
                     player.addToken(tokens[index]);
                     tokens.Remove(tokens[index]);
 
