@@ -34,8 +34,8 @@ namespace Game
                 for (int j = 0; j < n_players; j++)
                 {
                     int index;
-                    if (tokens.Count == 0) return;
-                    if (par_turn) // si es par se toma una ficha aleatoria de la lista de par y se le agrega a un jugador
+                    
+                    if (par_turn && par.Count > 0) // si es par se toma una ficha aleatoria de la lista de par y se le agrega a un jugador
                     {
                         index = rand.Next(0, par.Count);
                         players[i].addToken(par[index]);
@@ -45,11 +45,13 @@ namespace Game
                     else
                     {
                         //se le agrega la ficha impar 
-                        index = rand.Next(0, impar.Count);
-                        players[i].addToken(impar[index]);
-                        tokens.Remove(impar[index]);
-                        impar.RemoveAt(index);
-
+                        if (!par_turn && impar.Count > 0)
+                        {
+                            index = rand.Next(0, impar.Count);
+                            players[i].addToken(impar[index]);
+                            tokens.Remove(impar[index]);
+                            impar.RemoveAt(index);
+                        }
                     }
                 }
                 i++; // mover al siguiente jugador
